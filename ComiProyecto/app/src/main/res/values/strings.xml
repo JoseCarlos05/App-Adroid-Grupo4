@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ComiProyecto</string>
+    <string name="perfil">Foto de perfil</string>
+    <string name="editar">Editar perfil</string>
+    <string name="guardar">Guardar cambios</string>
+    <string name="nombrePerfil">Nombre: </string>
+    <string name="correoPerfil">Correo: </string>
+    <string name="telefonoPerfil">Teléfono: </string>
+    <string name="alturaPerfil">Altura: </string>
+    <string name="pesoPerfil">Peso: </string>
+    <string name="fechnacPerfil">Fecha de nacimiento: </string>
 </resources>
