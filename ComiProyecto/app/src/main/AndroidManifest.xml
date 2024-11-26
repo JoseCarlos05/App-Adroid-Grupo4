@@ -13,13 +13,13 @@
         android:theme="@style/Theme.ComiProyecto"
         tools:targetApi="31">
         <activity
-            android:name=".deportes"
+            android:name="com.example.comiproyecto.deportes"
             android:exported="false" />
         <activity
-            android:name=".MainActivity2"
+            android:name="com.example.comiproyecto.MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.comiproyecto.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

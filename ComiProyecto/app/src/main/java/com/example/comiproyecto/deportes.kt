@@ -1,4 +1,4 @@
-package com.example.deportes
+package com.example.comiproyecto
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,10 +11,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.comiproyecto.R
+import com.example.deportes.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class MainActivity : AppCompatActivity() {
+class deportes : AppCompatActivity() {
 
     private lateinit var cardAdapter: CardAdapter
     private val allCards = getCardData()  // Datos completos de las cartas

@@ -4,12 +4,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.comiproyecto"
-    compileSdk = 34
+    namespace = "com.example.deportes"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.comiproyecto"
+        applicationId = "com.example.deportes"
         minSdk = 24
+        //noinspection OldTargetApi
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -36,7 +37,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
