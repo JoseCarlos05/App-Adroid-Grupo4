@@ -8,6 +8,15 @@
     android:background="@color/fondo"
     tools:context=".MainActivity2">
 
+    <include
+        layout="@layout/header"
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -177,5 +186,14 @@
             android:background="@drawable/estilobotonguardar"/>
 
     </LinearLayout>
+
+    <include
+        layout="@layout/footer"
+        android:id="@+id/footer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
