@@ -39,12 +39,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.800">
+        app:layout_constraintVertical_bias="0.700">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/editar"
+            android:layout_gravity="end"
             android:src="@drawable/icons8editar40" />
 
         <LinearLayout
@@ -58,14 +59,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/nombrePerfil"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/nombrePerfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -80,14 +81,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/correoPerfil"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/correoPerfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -102,14 +103,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/telefonoPerfil"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/telefonoPerfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -124,14 +125,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/alturaPerfil"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/alturaPerfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -146,14 +147,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/pesoPerfil"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/pesoPerfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -168,14 +169,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/fechnacPerfil"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/fechnacPerfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -183,7 +184,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/guardar"
-            android:background="@drawable/estilobotonguardar"/>
+            android:layout_marginTop="15dp"
+            android:backgroundTint="?attr/colorButtonNormal"/>
 
     </LinearLayout>
 
@@ -194,6 +196,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
