@@ -25,15 +25,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val boton = findViewById<TextView>(R.id.texto)  //Creamos una variable con el botón a partir del XML
 
-        boton.setOnClickListener {  //Al pulsar el botón...
-            val intent = Intent(this, MainActivity2::class.java)  //Creamos un Intent para el MainActivity2.kt
 
-            val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-            //Le añadimos al pendingIntent el Intent antes creado
-            Handler(Looper.getMainLooper()).postDelayed({
-                pendingIntent.send() }, 1000)  //Hacemos que pase de una pantalla a otra con retardo, le especificamos que tarde 10 segundos
-        }
     }
 }
