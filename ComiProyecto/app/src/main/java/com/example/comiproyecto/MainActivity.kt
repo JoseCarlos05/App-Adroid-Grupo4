@@ -14,6 +14,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.comiproyecto.BasedeDatos.BDSQLite
+import com.example.comiproyecto.BasedeDatos.Modelos.Usuario
 import java.sql.DriverManager
 
 class MainActivity : AppCompatActivity() {
