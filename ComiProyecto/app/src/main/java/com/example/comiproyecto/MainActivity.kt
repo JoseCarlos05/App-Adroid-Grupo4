@@ -29,16 +29,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         val botonPerfil = findViewById<ImageView>(R.id.botonPerfil)
-
+        val botonInicio = findViewById<ImageView>(R.id.botonInicio)
+        val botonAgregar = findViewById<ImageView>(R.id.botonAgregar)
         botonPerfil.setOnClickListener {
-            
             val intent = Intent(this, MainActivity2::class.java)
-
-            val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-
-            Handler(Looper.getMainLooper()).postDelayed({ pendingIntent.send() }, 0)
-
-
+            startActivity(intent)
+        }
+        botonInicio.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        botonAgregar.setOnClickListener {
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
         }
 
     }

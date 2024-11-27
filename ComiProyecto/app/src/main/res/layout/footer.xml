@@ -24,6 +24,7 @@
                 app:srcCompat="@drawable/icons8cuenta30"/>
 
             <ImageView
+                android:id="@+id/botonInicio"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
@@ -31,6 +32,7 @@
                 app:srcCompat="@drawable/icons8casa24"/>
 
             <ImageView
+                android:id="@+id/botonAgregar"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
