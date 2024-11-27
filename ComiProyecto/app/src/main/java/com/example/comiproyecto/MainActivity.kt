@@ -6,9 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -26,18 +24,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-
         val botonAgregar = findViewById<ImageView>(R.id.botonAgregar)
-
         botonAgregar.setOnClickListener {
-
             val intent = Intent(this, MainActivity3::class.java)
-
             val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-
             Handler(Looper.getMainLooper()).postDelayed({ pendingIntent.send() }, 0)
-
-
         }
     }
 }
