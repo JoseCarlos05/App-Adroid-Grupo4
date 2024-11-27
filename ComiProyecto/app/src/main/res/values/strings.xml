@@ -9,4 +9,5 @@
     <string name="alturaPerfil">Altura: </string>
     <string name="pesoPerfil">Peso: </string>
     <string name="fechnacPerfil">Fecha de nacimiento: </string>
+    <string name="buscador">Buscar...</string>
 </resources>
