@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -37,21 +38,30 @@ class InicioSesion : AppCompatActivity() {
         val contrasenaTexto = findViewById<EditText>(R.id.contrasenaLogin)
 
         val botonLogin = findViewById<Button>(R.id.botonLogin)
+        val botonRegistro = findViewById<TextView>(R.id.botonRegistro)
 
         botonLogin.setOnClickListener {
 
-            val usuario = usuarioBD.buscarUsuarioPorCorreoYContrasena(correoTexto.toString(), contrasenaTexto.toString())
+            val usuario = usuarioBD.buscarUsuarioPorCorreoYContrasena(correoTexto.text.toString(), contrasenaTexto.text.toString())
 
             if (usuario != null) {
                 editor.putInt("usuario", usuario["id"] as Int)
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-            } else if () {
-
+            } else if (correoTexto.toString().isEmpty() || contrasenaTexto.toString().isEmpty()) {
+                Toast.makeText(this, "Hay campos vacíos", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this, "Correo o contraseña incorrectos", Toast.LENGTH_LONG).show()
             }
 
         }
+
+        botonRegistro.setOnClickListener {
+
+            val intent = Intent(this, Registro::class.java)
+            startActivity(intent)
+        }
+
+
     }
 }
