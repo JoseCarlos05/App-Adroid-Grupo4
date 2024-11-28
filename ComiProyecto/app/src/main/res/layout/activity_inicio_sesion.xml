@@ -8,17 +8,41 @@
     tools:context=".InicioSesion"
     android:background="@color/colorsecciones">
 
-    <LinearLayout
-        android:layout_width="306dp"
-        android:layout_height="432dp"
-        android:layout_margin="30dp"
-        android:orientation="vertical"
-        android:background="@drawable/estilofondologin"
+    <ImageView
+        android:layout_width="205dp"
+        android:layout_height="204dp"
+        android:src="@drawable/image3sf"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.400">
+        app:layout_constraintVertical_bias="0.003" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TRACK-FIT"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.298" />
+
+    <LinearLayout
+        android:layout_width="299dp"
+        android:layout_height="362dp"
+        android:layout_margin="30dp"
+        android:background="@drawable/estilofondologin"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.700">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,6 +56,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginBottom="15dp"
                 android:text="Correo electrónico: "
+                android:textStyle="bold"
                 android:textColor="@color/black" />
 
             <LinearLayout
@@ -57,6 +82,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginBottom="15dp"
                 android:text="Contraseña: "
+                android:textStyle="bold"
                 android:textColor="@color/black" />
 
             <LinearLayout
@@ -78,21 +104,22 @@
 
         </LinearLayout>
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
             android:text="Registrarme"
-            android:textColor="@color/black"
-            android:layout_gravity="center"/>
-
+            android:textStyle="bold"
+            android:textColor="@color/black" />
 
         <Button
+            android:id="@+id/botonLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Iniciar sesión"
+            android:layout_gravity="center"
             android:backgroundTint="?attr/colorButtonNormal"
-            android:layout_gravity="center"/>
+            android:text="Iniciar sesión"/>
 
     </LinearLayout>
 
