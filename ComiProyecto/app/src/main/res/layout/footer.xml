@@ -20,6 +20,7 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:contentDescription="@string/irPerfil"
                 app:srcCompat="@drawable/icons8cuenta30"/>
 
             <ImageView
@@ -30,7 +31,6 @@
                 app:srcCompat="@drawable/icons8casa24"/>
 
             <ImageView
-                android:id="@+id/botonAgregar"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
@@ -38,5 +38,7 @@
                 app:srcCompat="@drawable/icons8mas50"/>
 
         </LinearLayout>
+
     </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
