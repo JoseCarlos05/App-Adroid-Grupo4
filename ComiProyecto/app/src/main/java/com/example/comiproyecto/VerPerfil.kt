@@ -150,6 +150,10 @@ class VerPerfil : AppCompatActivity() {
             Toast.makeText(this, "Error: Usuario no encontrado", Toast.LENGTH_LONG).show()
         }
 
+        botonGuardar.setOnClickListener {
+
+        }
+
         val botonPerfil = findViewById<ImageView>(R.id.botonPerfil)
         val botonInicio = findViewById<ImageView>(R.id.botonInicio)
         val botonAgregar = findViewById<ImageView>(R.id.botonAgregar)
