@@ -1,22 +1,13 @@
 package com.example.comiproyecto
 
 import android.annotation.SuppressLint
-import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.comiproyecto.BasedeDatos.BDSQLite
-import com.example.comiproyecto.BasedeDatos.Modelos.Usuario
-import java.sql.DriverManager
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -34,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         val botonInicio = findViewById<ImageView>(R.id.botonInicio)
         val botonAgregar = findViewById<ImageView>(R.id.botonAgregar)
         botonPerfil.setOnClickListener {
-            val intent = Intent(this, MainActivity2::class.java)
+            val intent = Intent(this, VerPerfil::class.java)
             startActivity(intent)
         }
         botonInicio.setOnClickListener {
@@ -42,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         botonAgregar.setOnClickListener {
-            val intent = Intent(this, MainActivity2::class.java)
+            val intent = Intent(this, VerPerfil::class.java)
             startActivity(intent)
         }
 
