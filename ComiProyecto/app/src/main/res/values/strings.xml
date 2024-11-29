@@ -9,4 +9,10 @@
     <string name="alturaPerfil">Altura: </string>
     <string name="pesoPerfil">Peso: </string>
     <string name="fechnacPerfil">Fecha de nacimiento: </string>
+    <string name="irPerfil">Ir a perfil de usuario</string>
+    <string-array name="objetivos_array">
+        <item>Tonificar</item>
+        <item>Bajar de peso</item>
+        <item>Ganar masa muscular</item>
+    </string-array>
 </resources>
