@@ -13,20 +13,24 @@
         android:theme="@style/Theme.ComiProyecto"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity3"
+            android:name=".Registro"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivity3"
+            android:exported="false" />
+        <activity
+            android:name=".InicioSesion"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

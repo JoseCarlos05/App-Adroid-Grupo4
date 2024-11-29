@@ -6,15 +6,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import java.sql.DriverManager
+import com.example.comiproyecto.BasedeDatos.BDSQLite
+import com.example.comiproyecto.BasedeDatos.Modelos.Comida
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -29,17 +27,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         val botonPerfil = findViewById<ImageView>(R.id.botonPerfil)
-
+        val botonInicio = findViewById<ImageView>(R.id.botonInicio)
+        val botonAgregar = findViewById<ImageView>(R.id.botonAgregar)
         botonPerfil.setOnClickListener {
-            
             val intent = Intent(this, MainActivity2::class.java)
-
-            val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-
-            Handler(Looper.getMainLooper()).postDelayed({ pendingIntent.send() }, 0)
-
-
+            startActivity(intent)
         }
-
+        botonInicio.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        botonAgregar.setOnClickListener {
+            val intent = Intent(this, MainActivity3::class.java)
+            startActivity(intent)
+        }
     }
 }

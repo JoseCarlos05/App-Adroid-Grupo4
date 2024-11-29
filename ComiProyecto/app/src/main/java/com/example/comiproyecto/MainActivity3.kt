@@ -1,30 +1,22 @@
 package com.example.comiproyecto
 
+import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.comiproyecto.BasedeDatos.BDSQLite
+import com.example.comiproyecto.BasedeDatos.Modelos.Comida
 import androidx.appcompat.widget.SearchView
 
 class MainActivity3 : AppCompatActivity() {
-    private lateinit var comidaAdapter: ComidaAdapter
-    private val comidas = listOf(
-        Comida("Hamburguesa"),
-        Comida("Pizza"),
-        Comida("Tacos"),
-        Comida("Hot dog"),
-        Comida("Sushi"),
-        Comida("Ensalada"),
-        Comida("Pasta"),
-        Comida("Pollo"),
-        Comida("Helado"),
-        Comida("Pastel"),
-        Comida("Galletas"),
-        Comida("Donas")
-    )
+    private lateinit var dbH: SQLiteDatabase
+    private lateinit var adapter: ComidaAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,22 +28,41 @@ class MainActivity3 : AppCompatActivity() {
             insets
         }
 
+        val botonPerfil = findViewById<ImageView>(R.id.botonPerfil)
+        val botonInicio = findViewById<ImageView>(R.id.botonInicio)
+        val botonAgregar = findViewById<ImageView>(R.id.botonAgregar)
+        botonPerfil.setOnClickListener {
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+        }
+        botonInicio.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        botonAgregar.setOnClickListener {
+            val intent = Intent(this, MainActivity3::class.java)
+            startActivity(intent)
+        }
+
+        val db = BDSQLite(this)
+        dbH = db.writableDatabase
+        Comida.insertarComidasHardcodeadas(dbH)
+
+        val comidas = Comida.obtenerTodasLasComidas(dbH)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        comidaAdapter = ComidaAdapter(comidas)
-        recyclerView.adapter = comidaAdapter
+        adapter = ComidaAdapter(comidas)
+        recyclerView.adapter = adapter
 
-        val buscador = findViewById<SearchView>(R.id.buscador)
-        buscador.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        val searchView = findViewById<SearchView>(R.id.buscador)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                val filteredComidas = comidas.filter { it.nombre.contains(newText ?: "", ignoreCase = true) }
-                comidaAdapter = ComidaAdapter(filteredComidas)
-                recyclerView.adapter = comidaAdapter
-                return true
+                adapter.filter.filter(newText)
+                return false
             }
         })
     }
