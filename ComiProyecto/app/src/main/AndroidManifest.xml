@@ -16,10 +16,16 @@
             android:name="com.example.comiproyecto.deportes"
             android:exported="false" />
         <activity
-            android:name="com.example.comiproyecto.MainActivity2"
+            android:name="com.example.comiproyecto.Registro"
+            android:exported="false" />
+        <activity
+            android:name="com.example.comiproyecto.VerPerfil"
             android:exported="false" />
         <activity
             android:name="com.example.comiproyecto.MainActivity"
+            android:exported="false"/>
+        <activity
+            android:name="com.example.comiproyecto.InicioSesion"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
