@@ -12,6 +12,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.comiproyecto.BasedeDatos.BDSQLite
+import com.example.comiproyecto.BasedeDatos.Modelos.Usuario
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -24,8 +28,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-
-
+        val baseDatos = BDSQLite(this)
+        val usuarioModel = Usuario(baseDatos.readableDatabase)
+        val idUsuario = intent.getIntExtra("usuario_id", -1)
+        val comidas = usuarioModel.obtenerComidasDeUsuario(idUsuario)
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerComidas)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        val adaptador = ComidaAdapt(comidas)
+        recyclerView.adapter = adaptador
     }
 }

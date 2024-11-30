@@ -47,7 +47,9 @@ class InicioSesion : AppCompatActivity() {
             if (usuario != null) {
                 editor.putInt("usuario_id", usuario["id"] as Int)
                 editor.apply()
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("usuario_id", usuario["id"] as Int)
+                }
                 startActivity(intent)
             } else if (correoTexto.toString().isEmpty() || contrasenaTexto.toString().isEmpty()) {
                 Toast.makeText(this, "Hay campos vacíos", Toast.LENGTH_LONG).show()
