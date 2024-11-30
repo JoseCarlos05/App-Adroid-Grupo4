@@ -16,6 +16,15 @@ data class Comida(val nombre: String, val calorias: Int, val proteina: Float, va
         }
         db.insert("comida", null, valores)
     }
+    fun insertarUsuarioComida(idUsuario: Int, idComida: Int, fecha: String, cantidad: Int, db: SQLiteDatabase): Long {
+        val valores = ContentValues().apply {
+            put("id_usuario", idUsuario)
+            put("id_comida", idComida)
+            put("fecha", fecha)
+            put("cantidad", cantidad)
+        }
+        return db.insert("usuario_comida", null, valores)
+    }
 
     companion object {
         fun insertarComidasHardcodeadas(db: SQLiteDatabase) {

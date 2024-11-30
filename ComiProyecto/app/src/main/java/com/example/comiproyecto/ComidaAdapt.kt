@@ -25,7 +25,7 @@ RecyclerView.Adapter<ComidaAdapt.ComidaViewHolder>() {
         holder.nombre.text = comida["nombre"].toString()
         holder.cantidad.text = comida["cantidad"].toString()
 
-        val calorias = comida["calorias"] as? Double ?: 0.0
+        val calorias = comida["calorias"] as? Int ?: 0
         val proteinas = comida["proteinas"] as? Double ?: 0.0
         val carbohidratos = comida["carbohidratos"] as? Double ?: 0.0
         val grasas = comida["grasas"] as? Double ?: 0.0

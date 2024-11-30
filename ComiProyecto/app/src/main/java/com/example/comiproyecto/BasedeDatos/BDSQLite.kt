@@ -50,17 +50,6 @@ class BDSQLite(contexto: Context) : SQLiteOpenHelper(contexto, nombreBD, null, v
                 "FOREIGN KEY (id_usuario) REFERENCES usuarios(id), " +
                 "FOREIGN KEY (id_deporte) REFERENCES deporte(id))");
 
-        db.execSQL("INSERT INTO usuarios (nombre, correo, contrasena, telefono, altura, peso, fecha_nac, objetivo) VALUES " +
-                "('Juan Pérez', 'juan@mail.com', '1234', '987654321', 1.75, 70.5, '1990-05-20', 'Tonificar')," +
-                "('Ana López', 'ana@mail.com', '5678', '912345678', 1.62, 58.0, '1992-08-15', 'Bajar de peso')");
-
-        db.execSQL("INSERT INTO comida (nombre, calorias, proteinas, carbohidratos, vitaminas, grasas, minerales) VALUES " +
-                "('Manzana', 52, 0.3, 14, 0.02, 0.2, 0.1)," +
-                "('Pollo', 239, 27, 0, 0.05, 13, 1)");
-
-        db.execSQL("INSERT INTO deporte (nombre, objetivo) VALUES " +
-                "('Correr', 'Bajar de peso')," +
-                "('Levantamiento de pesas', 'Ganar masa muscular')");
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, version1: Int, version: Int) {
