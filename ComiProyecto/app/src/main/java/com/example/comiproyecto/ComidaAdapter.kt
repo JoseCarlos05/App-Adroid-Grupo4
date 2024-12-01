@@ -1,6 +1,10 @@
 package com.example.comiproyecto
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
+import android.database.sqlite.SQLiteDatabase
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +19,12 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import android.widget.DatePicker
 
-class ComidaAdapter(private var comidas: List<Comida>) : RecyclerView.Adapter<ComidaAdapter.ComidaViewHolder>(), Filterable {
+class ComidaAdapter(private var comidas: List<Comida>, private val db: SQLiteDatabase) : RecyclerView.Adapter<ComidaAdapter.ComidaViewHolder>(), Filterable {
     private var comidasFiltradas: List<Comida> = comidas
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComidaViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_comida, parent, false)
-        return ComidaViewHolder(view)
+        return ComidaViewHolder(view, db)
     }
 
     override fun onBindViewHolder(holder: ComidaViewHolder, position: Int) {
@@ -53,11 +57,10 @@ class ComidaAdapter(private var comidas: List<Comida>) : RecyclerView.Adapter<Co
         }
     }
 
-    class ComidaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ComidaViewHolder(itemView: View, private val db: SQLiteDatabase) : RecyclerView.ViewHolder(itemView) {
         private val nombreComida: TextView = itemView.findViewById(R.id.nombreComida)
         private val botonAnadir: Button = itemView.findViewById(R.id.botonAnadir)
         private val imagenInfo: ImageView = itemView.findViewById(R.id.imagenInfo)
-
 
         @SuppressLint("MissingInflatedId")
         fun bind(comida: Comida) {
@@ -75,9 +78,23 @@ class ComidaAdapter(private var comidas: List<Comida>) : RecyclerView.Adapter<Co
                     .setView(dialogView)
                     .setPositiveButton("Aceptar") { dialog, _ ->
                         val cantidad = dialogCantidad.text.toString().toIntOrNull()
-                        val day = dialogFecha.dayOfMonth
-                        val month = dialogFecha.month
-                        val year = dialogFecha.year
+                        if (cantidad != null) {
+                            val day = dialogFecha.dayOfMonth
+                            val month = dialogFecha.month
+                            val year = dialogFecha.year
+                            val fecha = "$year-${month + 1}-$day"
+
+                            val sharedPreferences: SharedPreferences = itemView.context.getSharedPreferences("usuario", MODE_PRIVATE)
+                            val usuarioId = sharedPreferences.getInt("usuario_id", -1)
+
+                            val values = ContentValues().apply {
+                                put("id_comida", comida.id)
+                                put("fecha", fecha)
+                                put("cantidad", cantidad)
+                                put("id_usuario", usuarioId)
+                            }
+                            db.insert("usuario_comida", null, values)
+                        }
                         dialog.dismiss()
                     }
                     .setNegativeButton("Cancelar") { dialog, _ ->

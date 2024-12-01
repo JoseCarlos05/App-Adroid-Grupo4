@@ -14,7 +14,7 @@ import com.example.comiproyecto.BasedeDatos.BDSQLite
 import com.example.comiproyecto.BasedeDatos.Modelos.Comida
 import androidx.appcompat.widget.SearchView
 
-class MainActivity3 : AppCompatActivity() {
+class AgregarComida : AppCompatActivity() {
     private lateinit var dbH: SQLiteDatabase
     private lateinit var adapter: ComidaAdapter
 
@@ -32,7 +32,7 @@ class MainActivity3 : AppCompatActivity() {
         val botonInicio = findViewById<ImageView>(R.id.botonInicio)
         val botonAgregar = findViewById<ImageView>(R.id.botonAgregar)
         botonPerfil.setOnClickListener {
-            val intent = Intent(this, MainActivity2::class.java)
+            val intent = Intent(this, VerPerfil::class.java)
             startActivity(intent)
         }
         botonInicio.setOnClickListener {
@@ -40,7 +40,7 @@ class MainActivity3 : AppCompatActivity() {
             startActivity(intent)
         }
         botonAgregar.setOnClickListener {
-            val intent = Intent(this, MainActivity3::class.java)
+            val intent = Intent(this, AgregarComida::class.java)
             startActivity(intent)
         }
 
@@ -51,7 +51,7 @@ class MainActivity3 : AppCompatActivity() {
         val comidas = Comida.obtenerTodasLasComidas(dbH)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ComidaAdapter(comidas)
+        adapter = ComidaAdapter(comidas, dbH)
         recyclerView.adapter = adapter
 
         val searchView = findViewById<SearchView>(R.id.buscador)

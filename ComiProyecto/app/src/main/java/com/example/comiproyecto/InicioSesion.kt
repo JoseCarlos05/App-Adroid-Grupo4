@@ -45,7 +45,8 @@ class InicioSesion : AppCompatActivity() {
             val usuario = usuarioBD.buscarUsuarioPorCorreoYContrasena(correoTexto.text.toString(), contrasenaTexto.text.toString())
 
             if (usuario != null) {
-                editor.putInt("usuario", usuario["id"] as Int)
+                editor.putInt("usuario_id", usuario["id"] as Int)
+                editor.apply()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             } else if (correoTexto.toString().isEmpty() || contrasenaTexto.toString().isEmpty()) {
