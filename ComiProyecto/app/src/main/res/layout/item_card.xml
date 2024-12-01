@@ -44,8 +44,8 @@
             <!-- Icono (a la derecha) -->
             <ImageView
                 android:id="@+id/card_icon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="end"
                 android:contentDescription="Ícono"/>
         </LinearLayout>

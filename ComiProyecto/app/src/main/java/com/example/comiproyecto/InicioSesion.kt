@@ -44,8 +44,8 @@ class InicioSesion : AppCompatActivity() {
 
         val bd = BDSQLite(this)
         val resultado = bd.insertarUsuario(
-            nombre = "ana",
-            correo = "ana@gmail.com",
+            nombre = "a",
+            correo = "a@gmail.com",
             contrasena = "1234",
             telefono = "123456789",
             altura = 1.65,

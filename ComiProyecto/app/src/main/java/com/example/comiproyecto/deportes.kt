@@ -44,21 +44,7 @@ class deportes : AppCompatActivity() {
 
 
 
-        val botonPerfil = findViewById<ImageView>(R.id.botonPerfil)
-        val botonInicio = findViewById<ImageView>(R.id.botonInicio)
-        val botonAgregar = findViewById<ImageView>(R.id.botonAgregar)
-        botonPerfil.setOnClickListener {
-            val intent = Intent(this, VerPerfil::class.java)
-            startActivity(intent)
-        }
-        botonInicio.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-        botonAgregar.setOnClickListener {
-            val intent = Intent(this, deportes::class.java)
-            startActivity(intent)
-        }
+
 
         // Configuración del RecyclerView
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
@@ -117,6 +103,28 @@ class deportes : AppCompatActivity() {
                 Toast.makeText(this, "Objetivo no reconocido", Toast.LENGTH_SHORT).show()
             }
         }
+
+
+        val footer = findViewById<View>(R.id.footer)
+        val botonPerfil = footer.findViewById<ImageView>(R.id.botonPerfil)
+        val botonInicio = footer.findViewById<ImageView>(R.id.botonInicio)
+        val botonAgregar = footer.findViewById<ImageView>(R.id.botonAgregar)
+
+        botonPerfil.setOnClickListener {
+            val intent = Intent(this, VerPerfil::class.java)
+            startActivity(intent)
+        }
+
+        botonInicio.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        botonAgregar.setOnClickListener {
+            val intent = Intent(this, deportes::class.java)
+            startActivity(intent)
+        }
+
     }
 
 
@@ -128,16 +136,53 @@ class deportes : AppCompatActivity() {
     // Datos de ejemplo para mostrar
     private fun getCardData(): List<CardItem> {
         return listOf(
-            CardItem("Flexiones", "Descripción de la carta 1", R.drawable.bajarpeso),
-            CardItem("Abdominales", "Descripción de la carta 2", R.drawable.tonificar),
-            CardItem("Burpees", "Descripción de la carta 3", R.drawable.masamuscular),
-            CardItem("Correr", "Descripción de la carta 1", R.drawable.bajarpeso),
-            CardItem("Saltar", "Descripción de la carta 2", R.drawable.tonificar),
-            CardItem("Saltar", "Descripción de la carta 3", R.drawable.masamuscular),
-            CardItem("Dominadas", "Descripción de la carta 1", R.drawable.bajarpeso),
-            CardItem("presbanca", "Descripción de la carta 2", R.drawable.tonificar),
-            CardItem("comba", "Descripción de la carta 3", R.drawable.masamuscular)
+            CardItem(
+                "Flexiones",
+                "Ejercicio que trabaja pecho, hombros y tríceps. Realiza 5 repeticiones durante 5 minutos, asegurándote de mantener la espalda recta y bajar el pecho sin tocar el suelo.",
+                R.drawable.bajarpeso
+            ),
+            CardItem(
+                "Abdominales",
+                "Fortalece el core. Haz 8 repeticiones de crunches, descansando 5 minutos entre series. Mantén la espalda recta y respira controladamente.",
+                R.drawable.tonificar
+            ),
+            CardItem(
+                "Burpees",
+                "Ejercicio de cuerpo completo que mejora la resistencia. Realiza 10 repeticiones durante 10 minutos, asegurándote de mantener una postura adecuada para evitar lesiones.",
+                R.drawable.masamuscular
+            ),
+            CardItem(
+                "Correr",
+                "Ejercicio cardiovascular que mejora la resistencia. Corre durante 20 minutos, mantén una postura erguida y respira de manera controlada.",
+                R.drawable.bajarpeso
+            ),
+            CardItem(
+                "Saltar",
+                "Mejora la explosividad y coordinación. Haz 20 repeticiones de saltos durante 8 minutos, manteniendo las rodillas ligeramente dobladas al aterrizar.",
+                R.drawable.tonificar
+            ),
+            CardItem(
+                "Saltar",
+                "Trabaja la fuerza en las piernas. Realiza 3 repeticiones de saltos durante 6 minutos, saltando con control para evitar impacto en las rodillas.",
+                R.drawable.masamuscular
+            ),
+            CardItem(
+                "Dominadas",
+                "Fortalece la espalda y los bíceps. Haz 12 repeticiones, descansando 11 minutos entre series. Usa asistencia si eres principiante.",
+                R.drawable.bajarpeso
+            ),
+            CardItem(
+                "Balón medicinal",
+                "Ejercicio funcional que trabaja el core y los hombros. Realiza 8 repeticiones de lanzamientos o giros con el balón durante 5 minutos.",
+                R.drawable.tonificar
+            ),
+            CardItem(
+                "Comba",
+                "Mejora la coordinación y cardiovascular. Haz 20 repeticiones de saltos durante 7 minutos, saltando con suavidad para proteger las articulaciones.",
+                R.drawable.masamuscular
+            )
         )
+
     }
 }
 

@@ -167,7 +167,7 @@ class VerPerfil : AppCompatActivity() {
             startActivity(intent)
         }
         botonAgregar.setOnClickListener {
-            val intent = Intent(this, VerPerfil::class.java)
+            val intent = Intent(this, deportes::class.java)
             startActivity(intent)
         }
     }
