@@ -27,19 +27,23 @@ class InicioSesion : AppCompatActivity() {
             insets
         }
 
+        //Instancia del sharedPreferences
         val sharedPreferences: SharedPreferences = getSharedPreferences("usuario", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 
+        //Conexión con la base de datos y el modelo usuario
         val db = BDSQLite(this)
         val dbW = db.writableDatabase
         val usuarioBD = Usuario(dbW)
 
+        //Declaración de textos y botones del xml
         val correoTexto = findViewById<EditText>(R.id.correoLogin)
         val contrasenaTexto = findViewById<EditText>(R.id.contrasenaLogin)
 
         val botonLogin = findViewById<Button>(R.id.botonLogin)
         val botonRegistro = findViewById<TextView>(R.id.botonRegistro)
 
+        //Acción del botón de inicio de sesión
         botonLogin.setOnClickListener {
 
             val usuario = usuarioBD.buscarUsuarioPorCorreoYContrasena(correoTexto.text.toString(), contrasenaTexto.text.toString())
@@ -57,12 +61,11 @@ class InicioSesion : AppCompatActivity() {
 
         }
 
+        //Redirección a la vista de registro
         botonRegistro.setOnClickListener {
 
             val intent = Intent(this, Registro::class.java)
             startActivity(intent)
         }
-
-
     }
 }

@@ -20,6 +20,44 @@ class Usuario(private val db: SQLiteDatabase) {
         return db.insert("usuarios", null, valores)
     }
 
+    fun actualizarUsuario(id: Int, nombre: String, correo: String, contrasena: String, telefono: String, altura: Double, peso: Double, fechaNac: String, objetivo: String): Int {
+        val valores = ContentValues().apply {
+            put("nombre", nombre)
+            put("correo", correo)
+            put("contrasena", contrasena)
+            put("telefono", telefono)
+            put("altura", altura)
+            put("peso", peso)
+            put("fecha_nac", fechaNac)
+            put("objetivo", objetivo)
+        }
+        return db.update("usuarios", valores, "id = ?", arrayOf(id.toString()))
+    }
+
+    fun comprobarUsuarioNombre(nombre: String): Boolean {
+        val query = "SELECT * FROM usuarios WHERE nombre = ?"
+        val cursor = db.rawQuery(query, arrayOf(nombre))
+        val usuario = cursor.moveToFirst()
+        cursor.close()
+        return usuario
+    }
+
+    fun comprobarUsuarioCorreo(correo: String): Boolean {
+        val query = "SELECT * FROM usuarios WHERE correo = ?"
+        val cursor = db.rawQuery(query, arrayOf(correo))
+        val usuario = cursor.moveToFirst()
+        cursor.close()
+        return usuario
+    }
+
+    fun comprobarUsuarioTelefono(telefono: String): Boolean {
+        val query = "SELECT * FROM usuarios WHERE telefono = ?"
+        val cursor = db.rawQuery(query, arrayOf(telefono))
+        val usuario = cursor.moveToFirst()
+        cursor.close()
+        return usuario
+    }
+
     fun buscarUsuarioPorID(id: Int): Map<String, Any>? {
         val cursor = db.rawQuery(
             "SELECT * FROM usuarios WHERE id = ?",

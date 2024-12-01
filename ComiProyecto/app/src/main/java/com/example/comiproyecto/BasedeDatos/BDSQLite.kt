@@ -15,14 +15,14 @@ class BDSQLite(contexto: Context) : SQLiteOpenHelper(contexto, nombreBD, null, v
 
         db.execSQL("CREATE TABLE usuarios (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "nombre TEXT, " +
-                "correo TEXT NOT NULL, " +
+                "nombre TEXT UNIQUE NOT NULL, " +
+                "correo TEXT UNIQUE NOT NULL, " +
                 "contrasena TEXT NOT NULL," +
-                "telefono TEXT CHECK(LENGTH(telefono) = 9), " +
-                "altura REAL, " +
-                "peso REAL, " +
-                "fecha_nac TIMESTAMP, " +
-                "objetivo TEXT CHECK(objetivo IN ('Tonificar', 'Bajar de peso', 'Ganar masa muscular')))");
+                "telefono TEXT UNIQUE CHECK(LENGTH(telefono) = 9) NOT NULL, " +
+                "altura REAL NOT NULL, " +
+                "peso REAL NOT NULL, " +
+                "fecha_nac TIMESTAMP NOT NULL, " +
+                "objetivo TEXT CHECK(objetivo IN ('Tonificar', 'Bajar de peso', 'Ganar masa muscular')) NOT NULL )");
         db.execSQL("CREATE TABLE comida (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "nombre TEXT, " +
