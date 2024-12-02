@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.comiproyecto.BasedeDatos.BDSQLite
 import com.example.comiproyecto.BasedeDatos.Modelos.Usuario
-import com.example.deportes.R
+import com.example.comiproyecto.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class deportes : AppCompatActivity() {
