@@ -13,19 +13,19 @@
         android:theme="@style/Theme.ComiProyecto"
         tools:targetApi="31">
         <activity
-            android:name="com.example.comiproyecto.deportes"
+            android:name=".deportes"
             android:exported="false" />
         <activity
-            android:name="com.example.comiproyecto.Registro"
+            android:name=".Registro"
             android:exported="false" />
         <activity
-            android:name="com.example.comiproyecto.VerPerfil"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.comiproyecto.MainActivity"
-            android:exported="false"/>
+            android:name=".VerPerfil"
+            android:exported="false" />
         <activity
-            android:name="com.example.comiproyecto.InicioSesion"
+            android:name=".InicioSesion"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
