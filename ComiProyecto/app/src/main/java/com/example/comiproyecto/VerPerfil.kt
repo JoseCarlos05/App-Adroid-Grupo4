@@ -130,6 +130,7 @@ class VerPerfil : AppCompatActivity() {
             }
         }
 
+        //Cargar los datos del usuario encontrado según el id
         if (usuarioId != -1) {
 
             val usuario = usuarioBD.buscarUsuarioPorID(usuarioId)
@@ -150,6 +151,28 @@ class VerPerfil : AppCompatActivity() {
             Toast.makeText(this, "Error: Usuario no encontrado", Toast.LENGTH_LONG).show()
         }
 
+        //Acción de actualizar los datos del usuario con el botón guardar
+        botonGuardar.setOnClickListener {
+
+            if (textoNombre.text.toString().isEmpty() || textoCorreo.text.toString().isEmpty() || textoContrasena.text.toString().isEmpty()
+                || textoTelefono.text.toString().isEmpty() || textoAltura.text.toString().isEmpty() || textoPeso.text.toString().isEmpty()
+                || textoFecha.text.toString().isEmpty()) {
+                Toast.makeText(this, "Hay campos vacíos", Toast.LENGTH_LONG).show()
+
+            } else {
+
+                usuarioBD.actualizarUsuario(usuarioId, textoNombre.text.toString(), textoCorreo.text.toString(), textoContrasena.text.toString(),
+                    textoTelefono.text.toString(), textoAltura.text.toString().toDouble(), textoPeso.text.toString().toDouble(),
+                    textoFecha.text.toString(), spinnerObjetivo.selectedItem.toString())
+
+                Toast.makeText(this, "Usuario ${textoNombre.text} actualizado", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this, VerPerfil::class.java)
+                startActivity(intent)
+            }
+        }
+
+        //Navegación entre vistas del footer
         val botonPerfil = findViewById<ImageView>(R.id.botonPerfil)
         val botonInicio = findViewById<ImageView>(R.id.botonInicio)
         val botonAgregar = findViewById<ImageView>(R.id.botonAgregar)
@@ -162,7 +185,7 @@ class VerPerfil : AppCompatActivity() {
             startActivity(intent)
         }
         botonAgregar.setOnClickListener {
-            val intent = Intent(this, VerPerfil::class.java)
+            val intent = Intent(this, AgregarComida::class.java)
             startActivity(intent)
         }
     }

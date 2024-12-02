@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class ComidaAdapt(private val listaComidas: List<Map<String, Any>>):
-RecyclerView.Adapter<ComidaAdapt.ComidaViewHolder>() {
+    RecyclerView.Adapter<ComidaAdapt.ComidaViewHolder>() {
     class ComidaViewHolder(obVi: View) : RecyclerView.ViewHolder(obVi) {
         val fecha = obVi.findViewById<TextView>(R.id.FechaComida)
         val nombre = obVi.findViewById<TextView>(R.id.NombreComida)

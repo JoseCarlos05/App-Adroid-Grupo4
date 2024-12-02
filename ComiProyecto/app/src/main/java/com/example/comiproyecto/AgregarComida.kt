@@ -1,15 +1,9 @@
 package com.example.comiproyecto
 
-import android.annotation.SuppressLint
-import android.app.PendingIntent
 import android.content.Intent
-import android.content.SharedPreferences
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,31 +12,44 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.comiproyecto.BasedeDatos.BDSQLite
 import com.example.comiproyecto.BasedeDatos.Modelos.Comida
-import com.example.comiproyecto.BasedeDatos.Modelos.Usuario
+import androidx.appcompat.widget.SearchView
 
-class MainActivity : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+class AgregarComida : AppCompatActivity() {
+    private lateinit var dbH: SQLiteDatabase
+    private lateinit var adapter: ComidaAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_agregar_comida)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        val baseDatos = BDSQLite(this)
-        val usuarioModel = Usuario(baseDatos.readableDatabase)
+        val db = BDSQLite(this)
+        dbH = db.writableDatabase
+        Comida.insertarComidasHardcodeadas(dbH)
 
-        val sharedPreferences: SharedPreferences = getSharedPreferences("usuario", MODE_PRIVATE)
-        val idUsuario = sharedPreferences.getInt("usuario_id", -1)
-
-        val comidas = usuarioModel.obtenerComidasDeUsuario(idUsuario)
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerComidas)
+        val comidas = Comida.obtenerTodasLasComidas(dbH)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val adaptador = ComidaAdapt(comidas)
-        recyclerView.adapter = adaptador
+        adapter = ComidaAdapter(comidas, dbH)
+        recyclerView.adapter = adapter
+
+        val searchView = findViewById<SearchView>(R.id.buscador)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+        })
+
 
         val botonPerfil = findViewById<ImageView>(R.id.botonPerfil)
         val botonInicio = findViewById<ImageView>(R.id.botonInicio)
