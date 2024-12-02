@@ -13,10 +13,19 @@
         android:theme="@style/Theme.ComiProyecto"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity2"
+            android:name=".AgregarComida"
+            android:exported="false" />
+        <activity
+            android:name=".Registro"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VerPerfil"
+            android:exported="false" />
+        <activity
+            android:name=".InicioSesion"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
