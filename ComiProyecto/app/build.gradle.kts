@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.deportes"
+    namespace = "com.example.comiproyecto"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.deportes"
+        applicationId = "com.example.comiproyecto"
         minSdk = 24
         //noinspection OldTargetApi
         targetSdk = 34
