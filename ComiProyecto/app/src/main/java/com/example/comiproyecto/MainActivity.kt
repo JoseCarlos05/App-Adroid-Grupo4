@@ -34,6 +34,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.header, Header())
+            .commit()
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.footer, Footer())
+            .commit()
+
         val baseDatos = BDSQLite(this)
         val usuarioModel = Usuario(baseDatos.readableDatabase)
 
@@ -45,42 +53,5 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adaptador = ComidaAdapt(comidas)
         recyclerView.adapter = adaptador
-
-
-        val botonConfig = findViewById<ImageView>(R.id.config)
-
-        botonConfig.setOnClickListener { view ->
-
-            val popupMenu = PopupMenu(this, view)
-            popupMenu.menuInflater.inflate(R.menu.menu_config, popupMenu.menu)
-
-            popupMenu.setOnMenuItemClickListener { item ->
-                when (item.itemId) {
-                    R.id.logOut -> {
-                        val intent = Intent(this, InicioSesion::class.java)
-                        startActivity(intent)
-                        true
-                    }
-                    else -> false
-                }
-            }
-            popupMenu.show()
-        }
-
-        val botonPerfil = findViewById<ImageView>(R.id.botonPerfil)
-        val botonInicio = findViewById<ImageView>(R.id.botonInicio)
-        val botonAgregar = findViewById<ImageView>(R.id.botonAgregar)
-        botonPerfil.setOnClickListener {
-            val intent = Intent(this, VerPerfil::class.java)
-            startActivity(intent)
-        }
-        botonInicio.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-        botonAgregar.setOnClickListener {
-            val intent = Intent(this, AgregarComida::class.java)
-            startActivity(intent)
-        }
     }
 }
