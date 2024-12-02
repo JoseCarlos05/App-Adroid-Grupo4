@@ -24,16 +24,7 @@
         <activity
             android:name=".VerPerfil"
             android:exported="false" />
-        <activity
-            android:name=".InicioSesion"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".Registro"
-            android:exported="false" />
-        <activity
-            android:name=".VerPerfil"
-            android:exported="false" />
+
         <activity
             android:name=".InicioSesion"
             android:exported="true">
