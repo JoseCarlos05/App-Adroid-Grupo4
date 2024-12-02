@@ -8,7 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.deportes.R
+import com.example.comiproyecto.R
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
