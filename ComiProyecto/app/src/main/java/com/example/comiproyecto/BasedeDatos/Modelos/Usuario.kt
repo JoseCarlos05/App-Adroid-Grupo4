@@ -107,4 +107,33 @@ class Usuario(private val db: SQLiteDatabase) {
             return null
         }
     }
+
+    fun obtenerComidasDeUsuario(idUsuario: Int): List<Map<String, Any>> {
+        val query = """
+    SELECT c.nombre, uc.fecha, uc.cantidad, c.calorias, c.proteinas, c.carbohidratos, c.grasas
+    FROM usuario_comida uc
+    JOIN comida c ON uc.id_comida = c.id
+    WHERE uc.id_usuario = ?
+    ORDER BY uc.fecha DESC
+    """
+        val cursor = db.rawQuery(query, arrayOf(idUsuario.toString()))
+        val comidas = mutableListOf<Map<String, Any>>()
+
+        if (cursor.moveToFirst()) {
+            do {
+                val comida = mapOf(
+                    "nombre" to cursor.getString(cursor.getColumnIndexOrThrow("nombre")),
+                    "fecha" to cursor.getString(cursor.getColumnIndexOrThrow("fecha")),
+                    "cantidad" to cursor.getInt(cursor.getColumnIndexOrThrow("cantidad")),
+                    "calorias" to cursor.getInt(cursor.getColumnIndexOrThrow("calorias")),
+                    "proteinas" to String.format("%.2f", cursor.getDouble(cursor.getColumnIndexOrThrow("proteinas"))).toDouble(),
+                    "carbohidratos" to String.format("%.2f", cursor.getDouble(cursor.getColumnIndexOrThrow("carbohidratos"))).toDouble(),
+                    "grasas" to String.format("%.2f", cursor.getDouble(cursor.getColumnIndexOrThrow("grasas"))).toDouble()
+                )
+                comidas.add(comida)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return comidas
+    }
 }

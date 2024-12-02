@@ -185,7 +185,7 @@ class VerPerfil : AppCompatActivity() {
             startActivity(intent)
         }
         botonAgregar.setOnClickListener {
-            val intent = Intent(this, VerPerfil::class.java)
+            val intent = Intent(this, AgregarComida::class.java)
             startActivity(intent)
         }
     }

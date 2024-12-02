@@ -15,4 +15,7 @@
         <item>Bajar de peso</item>
         <item>Ganar masa muscular</item>
     </string-array>
+    <string name="anadir">Añadir</string>
+    <string name="info">Info</string>
+    <string name="cantidad">Cantidad</string>
 </resources>
