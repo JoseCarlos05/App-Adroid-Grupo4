@@ -16,7 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.comiproyecto.BasedeDatos.BDSQLite
 import com.example.comiproyecto.BasedeDatos.Modelos.Usuario
-import com.example.deportes.R
+import com.example.comiproyecto.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
