@@ -10,12 +10,12 @@
     <string name="pesoPerfil">Peso: </string>
     <string name="fechnacPerfil">Fecha de nacimiento: </string>
     <string name="irPerfil">Ir a perfil de usuario</string>
-    <string name="anadir">Añadir</string>
-    <string name="info">Info</string>
-    <string name="cantidad">Cantidad</string>
     <string-array name="objetivos_array">
         <item>Tonificar</item>
         <item>Bajar de peso</item>
         <item>Ganar masa muscular</item>
     </string-array>
+    <string name="anadir">Añadir</string>
+    <string name="info">Info</string>
+    <string name="cantidad">Cantidad</string>
 </resources>

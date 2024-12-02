@@ -1,13 +1,24 @@
 package com.example.comiproyecto
 
 import android.annotation.SuppressLint
+import android.app.PendingIntent
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.comiproyecto.BasedeDatos.BDSQLite
+import com.example.comiproyecto.BasedeDatos.Modelos.Comida
+import com.example.comiproyecto.BasedeDatos.Modelos.Usuario
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -20,6 +31,18 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val baseDatos = BDSQLite(this)
+        val usuarioModel = Usuario(baseDatos.readableDatabase)
+
+        val sharedPreferences: SharedPreferences = getSharedPreferences("usuario", MODE_PRIVATE)
+        val idUsuario = sharedPreferences.getInt("usuario_id", -1)
+
+        val comidas = usuarioModel.obtenerComidasDeUsuario(idUsuario)
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerComidas)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        val adaptador = ComidaAdapt(comidas)
+        recyclerView.adapter = adaptador
 
         val botonPerfil = findViewById<ImageView>(R.id.botonPerfil)
         val botonInicio = findViewById<ImageView>(R.id.botonInicio)
