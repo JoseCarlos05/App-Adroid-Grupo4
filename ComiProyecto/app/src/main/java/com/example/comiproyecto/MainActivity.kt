@@ -9,7 +9,9 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -43,6 +45,27 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adaptador = ComidaAdapt(comidas)
         recyclerView.adapter = adaptador
+
+
+        val botonConfig = findViewById<ImageView>(R.id.config)
+
+        botonConfig.setOnClickListener { view ->
+
+            val popupMenu = PopupMenu(this, view)
+            popupMenu.menuInflater.inflate(R.menu.menu_config, popupMenu.menu)
+
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.logOut -> {
+                        val intent = Intent(this, InicioSesion::class.java)
+                        startActivity(intent)
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popupMenu.show()
+        }
 
         val botonPerfil = findViewById<ImageView>(R.id.botonPerfil)
         val botonInicio = findViewById<ImageView>(R.id.botonInicio)
