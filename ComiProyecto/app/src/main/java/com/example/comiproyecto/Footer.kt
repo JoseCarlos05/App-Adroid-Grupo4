@@ -19,6 +19,7 @@ class Footer : Fragment() {
         val botonPerfil = view.findViewById<ImageView>(R.id.botonPerfil)
         val botonInicio = view.findViewById<ImageView>(R.id.botonInicio)
         val botonAgregar = view.findViewById<ImageView>(R.id.botonAgregar)
+        val botonDeportes= view.findViewById<ImageView>(R.id.botonDeportes)
 
         botonPerfil.setOnClickListener {
             val intent = Intent(requireContext(), VerPerfil::class.java)
@@ -30,6 +31,10 @@ class Footer : Fragment() {
         }
         botonAgregar.setOnClickListener {
             val intent = Intent(requireContext(), AgregarComida::class.java)
+            startActivity(intent)
+        }
+        botonDeportes.setOnClickListener {
+            val intent = Intent(requireContext(), Deportes::class.java)
             startActivity(intent)
         }
 
