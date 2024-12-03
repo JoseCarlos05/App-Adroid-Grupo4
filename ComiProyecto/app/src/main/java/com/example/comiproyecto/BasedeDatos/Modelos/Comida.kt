@@ -3,7 +3,9 @@ package com.example.comiproyecto.BasedeDatos.Modelos
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 
+// Clase que representa una comida
 data class Comida(val id: Int, val nombre: String, val calorias: Int, val proteina: Float, val carbohidratos: Float, val vitaminas: Float, val grasas: Float, val minerales: Float) {
+    // Función para insertar una comida en la base de datos
     fun insertarComida(db: SQLiteDatabase) {
         val valores = ContentValues().apply {
             put("id", id)
@@ -18,7 +20,9 @@ data class Comida(val id: Int, val nombre: String, val calorias: Int, val protei
         db.insert("comida", null, valores)
     }
 
+    // Función para obtener todas las comidas de la base de datos
     companion object {
+        // Función para insertar comidas hardcodeadas en la base de datos
         fun insertarComidasHardcodeadas(db: SQLiteDatabase) {
             val cursor = db.query("comida", null, null, null, null, null, null)
             if (cursor.count == 0) {
@@ -45,6 +49,7 @@ data class Comida(val id: Int, val nombre: String, val calorias: Int, val protei
             cursor.close()
         }
 
+        // Función para obtener todas las comidas de la base de datos
         fun obtenerTodasLasComidas(db: SQLiteDatabase): List<Comida> {
             val comidas = mutableListOf<Comida>()
             val cursor = db.query("comida", null, null, null, null, null, null)
