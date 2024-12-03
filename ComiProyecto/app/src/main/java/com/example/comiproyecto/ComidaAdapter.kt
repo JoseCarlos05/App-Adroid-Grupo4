@@ -18,6 +18,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import android.widget.DatePicker
+import android.widget.Toast
 
 class ComidaAdapter(private var comidas: List<Comida>, private val db: SQLiteDatabase) : RecyclerView.Adapter<ComidaAdapter.ComidaViewHolder>(), Filterable {
     private var comidasFiltradas: List<Comida> = comidas
@@ -76,9 +77,19 @@ class ComidaAdapter(private var comidas: List<Comida>, private val db: SQLiteDat
 
                 val dialog = AlertDialog.Builder(itemView.context)
                     .setView(dialogView)
-                    .setPositiveButton("Aceptar") { dialog, _ ->
+                    .setPositiveButton("Aceptar", null)
+                    .setNegativeButton("Cancelar") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .create()
+
+                dialog.setOnShowListener {
+                    val button = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                    button.setOnClickListener {
                         val cantidad = dialogCantidad.text.toString().toIntOrNull()
-                        if (cantidad != null) {
+                        if (cantidad == null || cantidad <= 0) {
+                            Toast.makeText(itemView.context, "La cantidad no puede estar vacía o ser 0", Toast.LENGTH_SHORT).show()
+                        } else {
                             val day = dialogFecha.dayOfMonth
                             val month = dialogFecha.month
                             val year = dialogFecha.year
@@ -94,13 +105,10 @@ class ComidaAdapter(private var comidas: List<Comida>, private val db: SQLiteDat
                                 put("id_usuario", usuarioId)
                             }
                             db.insert("usuario_comida", null, values)
+                            dialog.dismiss()
                         }
-                        dialog.dismiss()
                     }
-                    .setNegativeButton("Cancelar") { dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    .create()
+                }
                 dialog.show()
             }
 
