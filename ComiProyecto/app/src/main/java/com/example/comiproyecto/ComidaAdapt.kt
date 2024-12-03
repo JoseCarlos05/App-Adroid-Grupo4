@@ -29,7 +29,7 @@ class ComidaAdapt(private val listaComidas: List<Map<String, Any>>):
         val proteinas = comida["proteinas"] as? Double ?: 0.0
         val carbohidratos = comida["carbohidratos"] as? Double ?: 0.0
         val grasas = comida["grasas"] as? Double ?: 0.0
-        holder.nutrientes.text = "Calorías: $calorias, Proteínas: $proteinas, Carbohidratos: $carbohidratos, Grasas: $grasas"
+        holder.nutrientes.text = "Calorías: $calorias cal, Proteínas: $proteinas g, Carbohidratos: $carbohidratos g, Grasas: $grasas g"
     }
 
     override fun getItemCount(): Int {
