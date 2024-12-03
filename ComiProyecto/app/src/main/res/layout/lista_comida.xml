@@ -12,22 +12,12 @@
         android:padding="12dp">
 
         <TextView
-            android:id="@+id/FechaComida"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fecha"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <TextView
             android:id="@+id/NombreComida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nombre de la comida"
             android:textSize="14sp"
-            android:textColor="@color/black"
-            android:layout_below="@id/FechaComida" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/CantidadComida"
