@@ -116,6 +116,7 @@ class VerPerfil : AppCompatActivity() {
                 spinnerObjetivo.isEnabled = true
 
                 botonGuardar.isEnabled = true
+                editar.setImageResource(R.drawable.icons8editar40blancoynegro)
             } else {
                 textoNombre.isEnabled = false
                 textoCorreo.isEnabled = false
@@ -127,6 +128,7 @@ class VerPerfil : AppCompatActivity() {
                 spinnerObjetivo.isEnabled = false
 
                 botonGuardar.isEnabled = false
+                editar.setImageResource(R.drawable.icons8editar40)
             }
         }
 
