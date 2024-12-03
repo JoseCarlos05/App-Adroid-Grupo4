@@ -5,6 +5,7 @@
     <string name="guardar">Guardar cambios</string>
     <string name="nombrePerfil">Nombre: </string>
     <string name="correoPerfil">Correo: </string>
+    <string name="contrasenaPerfil">Contraseña: </string>
     <string name="telefonoPerfil">Teléfono: </string>
     <string name="alturaPerfil">Altura: </string>
     <string name="pesoPerfil">Peso: </string>
@@ -29,9 +30,9 @@
     <string name="rNombreE">Introduce tu nombre</string>
     <string name="rCorreo">Correo</string>
     <string name="rCorreoE">Introduce tu correo</string>
-    <string name="rContrasena">Contrasena</string>
+    <string name="rContrasena">Contraseña</string>
     <string name="rContrasenaE">Introduce tu contrasena</string>
-    <string name="rTelef">Telef</string>
+    <string name="rTelef">Teléfono</string>
     <string name="rTelefE">Introduce tu teléfono</string>
     <string name="rAltura">Altura (cm)</string>
     <string name="rAlturaE">Introduce tu teléfono</string>

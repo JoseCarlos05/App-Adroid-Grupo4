@@ -37,5 +37,69 @@ class Deporte (val id: Int, val nombre: String, val descripcion: String, val obj
             }
             cursor.close()
         }
+
+        // Inserta deportes en usuario_deporte basados en el objetivo del usuario
+        fun insertarDeportesUsuario(db: SQLiteDatabase, usuarioId: Int) {
+            // Paso 1: Elimina todos los datos de la tabla usuario_deporte
+            db.delete("usuario_deporte", "id_usuario = ?", arrayOf(usuarioId.toString()))
+
+            // Paso 2: Obtiene el objetivo del usuario
+            val cursorUsuario = db.query(
+                "usuarios",
+                arrayOf("objetivo"), // Solo necesitamos el objetivo
+                "id = ?",
+                arrayOf(usuarioId.toString()),
+                null,
+                null,
+                null
+            )
+
+            var objetivoUsuario: String? = null
+            if (cursorUsuario.moveToFirst()) {
+                objetivoUsuario = cursorUsuario.getString(cursorUsuario.getColumnIndexOrThrow("objetivo"))
+            }
+            cursorUsuario.close()
+
+            if (objetivoUsuario != null) {
+                // Paso 3: Consulta los deportes que tienen el mismo objetivo que el usuario
+                val cursorDeportes = db.query(
+                    "deporte",
+                    arrayOf("id"), // Solo necesitamos el ID del deporte
+                    "objetivo = ?",
+                    arrayOf(objetivoUsuario),
+                    null,
+                    null,
+                    null
+                )
+
+                // Paso 4: Inserta las relaciones en usuario_deporte
+                while (cursorDeportes.moveToNext()) {
+                    val deporteId = cursorDeportes.getInt(cursorDeportes.getColumnIndexOrThrow("id"))
+
+                    // Verifica si la relación ya existe en usuario_deporte
+                    val existeCursor = db.query(
+                        "usuario_deporte",
+                        null,
+                        "id_usuario = ? AND id_deporte = ?",
+                        arrayOf(usuarioId.toString(), deporteId.toString()),
+                        null,
+                        null,
+                        null
+                    )
+
+                    if (existeCursor.count == 0) {
+                        // Si no existe, inserta la relación
+                        val valores = ContentValues().apply {
+                            put("id_usuario", usuarioId)
+                            put("id_deporte", deporteId)
+                        }
+                        db.insert("usuario_deporte", null, valores)
+                    }
+                    existeCursor.close()
+                }
+                cursorDeportes.close()
+            }
+        }
+
     }
 }
