@@ -110,7 +110,7 @@ class Usuario(private val db: SQLiteDatabase) {
 
     fun obtenerComidasDeUsuario(idUsuario: Int): List<Map<String, Any>> {
         val query = """
-    SELECT c.nombre, uc.fecha, uc.cantidad, c.calorias, c.proteinas, c.carbohidratos, c.grasas
+    SELECT c.nombre, uc.fecha, uc.cantidad, c.calorias, c.proteinas, c.carbohidratos, c.grasas, c.minerales, c.vitaminas
     FROM usuario_comida uc
     JOIN comida c ON uc.id_comida = c.id
     WHERE uc.id_usuario = ?
@@ -128,7 +128,9 @@ class Usuario(private val db: SQLiteDatabase) {
                     "calorias" to cursor.getInt(cursor.getColumnIndexOrThrow("calorias")),
                     "proteinas" to String.format("%.2f", cursor.getDouble(cursor.getColumnIndexOrThrow("proteinas"))).toDouble(),
                     "carbohidratos" to String.format("%.2f", cursor.getDouble(cursor.getColumnIndexOrThrow("carbohidratos"))).toDouble(),
-                    "grasas" to String.format("%.2f", cursor.getDouble(cursor.getColumnIndexOrThrow("grasas"))).toDouble()
+                    "grasas" to String.format("%.2f", cursor.getDouble(cursor.getColumnIndexOrThrow("grasas"))).toDouble(),
+                    "minerales" to String.format("%.2f", cursor.getDouble(cursor.getColumnIndexOrThrow("minerales"))).toDouble(),
+                    "vitaminas" to String.format("%.2f", cursor.getDouble(cursor.getColumnIndexOrThrow("vitaminas"))).toDouble(),
                 )
                 comidas.add(comida)
             } while (cursor.moveToNext())

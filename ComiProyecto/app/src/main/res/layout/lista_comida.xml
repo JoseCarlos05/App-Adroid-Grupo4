@@ -6,10 +6,9 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="12dp">
 
         <TextView
@@ -27,7 +26,8 @@
             android:layout_height="wrap_content"
             android:text="Nombre de la comida"
             android:textSize="14sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:layout_below="@id/FechaComida" />
 
         <TextView
             android:id="@+id/CantidadComida"
@@ -35,15 +35,25 @@
             android:layout_height="wrap_content"
             android:text="Cantidad"
             android:textSize="14sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:layout_below="@id/NombreComida" />
 
         <TextView
             android:id="@+id/NutrientesComida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calorías, proteínas, carbohidratos, grasas"
+            android:text="Calorías"
             android:textSize="14sp"
-            android:textColor="@color/gris"/>
-    </LinearLayout>
+            android:textColor="@color/gris"
+            android:layout_below="@id/CantidadComida"/>
+
+        <ImageView
+            android:id="@+id/imagenInfo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icons8informacion50" />
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
