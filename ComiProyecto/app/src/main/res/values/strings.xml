@@ -18,4 +18,14 @@
     <string name="anadir">Añadir</string>
     <string name="info">Info</string>
     <string name="cantidad">Cantidad</string>
+
+
+    <string name="titulo">TRACK-FIT</string>
+    <string name="correo">Correo electrónico: </string>
+    <string name="correoText">Introduce tu correo</string>
+    <string name="contrasena">Contraseña: </string>
+    <string name="contrasenaText">Introduce tu contraseña</string>
+    <string name="registrarme">Registrarme</string>
+    <string name="iniciarSesion">Iniciar sesión</string>
+
 </resources>
