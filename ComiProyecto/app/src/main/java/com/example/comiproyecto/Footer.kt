@@ -14,13 +14,16 @@ class Footer : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        //Vista instanciada e inflada
         val view = inflater.inflate(R.layout.footer, container, false)
 
+        //Constantes de botones declaradas
         val botonPerfil = view.findViewById<ImageView>(R.id.botonPerfil)
         val botonInicio = view.findViewById<ImageView>(R.id.botonInicio)
         val botonAgregar = view.findViewById<ImageView>(R.id.botonAgregar)
         val botonDeportes= view.findViewById<ImageView>(R.id.botonDeportes)
 
+        //Acciones para cambiar a cada vista
         botonPerfil.setOnClickListener {
             val intent = Intent(requireContext(), VerPerfil::class.java)
             startActivity(intent)

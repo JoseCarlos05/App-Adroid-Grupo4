@@ -18,24 +18,31 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import android.widget.DatePicker
+import android.widget.Toast
 
+// Adaptador para las comidas
 class ComidaAdapter(private var comidas: List<Comida>, private val db: SQLiteDatabase) : RecyclerView.Adapter<ComidaAdapter.ComidaViewHolder>(), Filterable {
+    // Lista de comidas filtradas
     private var comidasFiltradas: List<Comida> = comidas
 
+    // Función para crear la vista de las comidas
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComidaViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_comida, parent, false)
         return ComidaViewHolder(view, db)
     }
 
+    // Función para enlazar la vista con los datos de la comida
     override fun onBindViewHolder(holder: ComidaViewHolder, position: Int) {
         val comida = comidasFiltradas[position]
         holder.bind(comida)
     }
 
+    // Función para obtener la cantidad de comidas
     override fun getItemCount(): Int {
         return comidasFiltradas.size
     }
 
+    // Función para filtrar las comidas
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
@@ -57,15 +64,19 @@ class ComidaAdapter(private var comidas: List<Comida>, private val db: SQLiteDat
         }
     }
 
+    // Clase para representar la vista de una comida
     class ComidaViewHolder(itemView: View, private val db: SQLiteDatabase) : RecyclerView.ViewHolder(itemView) {
+        // Declaración de variables
         private val nombreComida: TextView = itemView.findViewById(R.id.nombreComida)
         private val botonAnadir: Button = itemView.findViewById(R.id.botonAnadir)
         private val imagenInfo: ImageView = itemView.findViewById(R.id.imagenInfo)
 
+        // Función para enlazar la vista con los datos de la comida
         @SuppressLint("MissingInflatedId")
         fun bind(comida: Comida) {
             nombreComida.text = comida.nombre
 
+            // Boton para añadir una comida
             botonAnadir.setOnClickListener {
                 val dialogView = LayoutInflater.from(itemView.context).inflate(R.layout.dialog_comida_anadir, null)
                 val dialogNombreComida: TextView = dialogView.findViewById(R.id.dialogNombreComida)
@@ -76,9 +87,19 @@ class ComidaAdapter(private var comidas: List<Comida>, private val db: SQLiteDat
 
                 val dialog = AlertDialog.Builder(itemView.context)
                     .setView(dialogView)
-                    .setPositiveButton("Aceptar") { dialog, _ ->
+                    .setPositiveButton("Aceptar", null)
+                    .setNegativeButton("Cancelar") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .create()
+
+                dialog.setOnShowListener {
+                    val button = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                    button.setOnClickListener {
                         val cantidad = dialogCantidad.text.toString().toIntOrNull()
-                        if (cantidad != null) {
+                        if (cantidad == null || cantidad <= 0) {
+                            Toast.makeText(itemView.context, "La cantidad no puede estar vacía o ser 0", Toast.LENGTH_SHORT).show()
+                        } else {
                             val day = dialogFecha.dayOfMonth
                             val month = dialogFecha.month
                             val year = dialogFecha.year
@@ -94,16 +115,14 @@ class ComidaAdapter(private var comidas: List<Comida>, private val db: SQLiteDat
                                 put("id_usuario", usuarioId)
                             }
                             db.insert("usuario_comida", null, values)
+                            dialog.dismiss()
                         }
-                        dialog.dismiss()
                     }
-                    .setNegativeButton("Cancelar") { dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    .create()
+                }
                 dialog.show()
             }
 
+            // Imagen para ver la información de una comida
             imagenInfo.setOnClickListener {
                 val dialogView = LayoutInflater.from(itemView.context).inflate(R.layout.dialog_comida_info, null)
                 val dialogNombreComida: TextView = dialogView.findViewById(R.id.dialogNombreComida)
