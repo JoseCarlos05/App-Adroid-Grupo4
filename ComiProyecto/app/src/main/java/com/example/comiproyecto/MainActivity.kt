@@ -9,7 +9,9 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -32,6 +34,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.header, Header())
+            .commit()
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.footer, Footer())
+            .commit()
+
         val baseDatos = BDSQLite(this)
         val usuarioModel = Usuario(baseDatos.readableDatabase)
 
@@ -43,21 +53,5 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adaptador = ComidaAdapt(comidas)
         recyclerView.adapter = adaptador
-
-        val botonPerfil = findViewById<ImageView>(R.id.botonPerfil)
-        val botonInicio = findViewById<ImageView>(R.id.botonInicio)
-        val botonAgregar = findViewById<ImageView>(R.id.botonAgregar)
-        botonPerfil.setOnClickListener {
-            val intent = Intent(this, VerPerfil::class.java)
-            startActivity(intent)
-        }
-        botonInicio.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-        botonAgregar.setOnClickListener {
-            val intent = Intent(this, AgregarComida::class.java)
-            startActivity(intent)
-        }
     }
 }
