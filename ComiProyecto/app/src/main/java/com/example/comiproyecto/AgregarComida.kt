@@ -51,20 +51,12 @@ class AgregarComida : AppCompatActivity() {
         })
 
 
-        val botonPerfil = findViewById<ImageView>(R.id.botonPerfil)
-        val botonInicio = findViewById<ImageView>(R.id.botonInicio)
-        val botonAgregar = findViewById<ImageView>(R.id.botonAgregar)
-        botonPerfil.setOnClickListener {
-            val intent = Intent(this, VerPerfil::class.java)
-            startActivity(intent)
-        }
-        botonInicio.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-        botonAgregar.setOnClickListener {
-            val intent = Intent(this, AgregarComida::class.java)
-            startActivity(intent)
-        }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.header, Header())
+            .commit()
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.footer, Footer())
+            .commit()
     }
 }
