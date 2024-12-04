@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ComiProyecto</string>
+    <string name="app_name">Track-Fit</string>
     <string name="perfil">Foto de perfil</string>
     <string name="editar">Editar perfil</string>
     <string name="guardar">Guardar cambios</string>
