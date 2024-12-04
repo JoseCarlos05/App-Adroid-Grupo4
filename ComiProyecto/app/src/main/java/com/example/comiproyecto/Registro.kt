@@ -63,6 +63,11 @@ class Registro : AppCompatActivity() {
         //Configuración para el campo de fecha
         val calendario = Calendar.getInstance()
 
+        // Establece la fecha máxima para evitar que se seleccione una fecha de menos de 5 años
+        calendario.add(Calendar.YEAR, -5)
+        val fechaMaxima = calendario.timeInMillis
+        calendario.add(Calendar.YEAR, 5)
+
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             calendario.set(Calendar.YEAR, year)
             calendario.set(Calendar.MONTH, month)
@@ -73,13 +78,16 @@ class Registro : AppCompatActivity() {
         }
 
         fecha.setOnClickListener {
-            DatePickerDialog(
+            val datePickerDialog = DatePickerDialog(
                 this,
                 dateSetListener,
                 calendario.get(Calendar.YEAR),
                 calendario.get(Calendar.MONTH),
                 calendario.get(Calendar.DAY_OF_MONTH)
-            ).show()
+            )
+            // Aplica la restricción de fecha máxima
+            datePickerDialog.datePicker.maxDate = fechaMaxima
+            datePickerDialog.show()
         }
 
         //Acción del botón de retroceso
