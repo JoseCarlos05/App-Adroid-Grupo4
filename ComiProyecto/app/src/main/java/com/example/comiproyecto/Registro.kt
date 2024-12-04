@@ -115,9 +115,7 @@ class Registro : AppCompatActivity() {
 
             } else if (textoTelefono.text.toString().length != 9) {
                 Toast.makeText(this, "Número de teléfono inválido", Toast.LENGTH_LONG).show()
-            }
-
-            else {
+            } else {
 
                 usuarioBD.insertarUsuario(textoNombre.text.toString(), textoCorreo.text.toString(), textoContrasena.text.toString(),
                     textoTelefono.text.toString(), textoAltura.text.toString().toDouble(), textoPeso.text.toString().toDouble(),
