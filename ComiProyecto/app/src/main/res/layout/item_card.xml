@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
     android:elevation="4dp"
     app:cardCornerRadius="8dp">
@@ -18,7 +18,7 @@
             android:id="@+id/card_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Título de la carta"
+            android:text="@string/titulocarta"
             android:textSize="18sp"
             android:textColor="#000000"
             android:layout_gravity="start"
@@ -36,7 +36,7 @@
                 android:id="@+id/card_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descripción de la carta"
+                android:text="@string/descripciondelacarta"
                 android:textSize="14sp"
                 android:textColor="#555555"
                 android:layout_weight="1"/>
@@ -46,9 +46,20 @@
                 android:id="@+id/card_icon"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_gravity="end"
-                android:contentDescription="Ícono"/>
+                android:layout_gravity="end"/>
+
         </LinearLayout>
 
+        <!-- Texto "(Tu objetivo)" que será visible solo cuando coincida con el objetivo del usuario -->
+        <TextView
+            android:id="@+id/objective_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tuobj"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"/>
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

@@ -16,7 +16,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.comiproyecto.BasedeDatos.BDSQLite
 import com.example.comiproyecto.BasedeDatos.Modelos.Usuario
-import com.example.comiproyecto.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -59,6 +58,11 @@ class VerPerfil : AppCompatActivity() {
         //Configuración para el campo de fecha
         val calendario = Calendar.getInstance()
 
+        // Establece la fecha máxima para evitar que se seleccione una fecha de menos de 5 años
+        calendario.add(Calendar.YEAR, -5)
+        val fechaMaxima = calendario.timeInMillis
+        calendario.add(Calendar.YEAR, 5)
+
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             calendario.set(Calendar.YEAR, year)
             calendario.set(Calendar.MONTH, month)
@@ -69,13 +73,16 @@ class VerPerfil : AppCompatActivity() {
         }
 
         textoFecha.setOnClickListener {
-            DatePickerDialog(
+            val datePickerDialog = DatePickerDialog(
                 this,
                 dateSetListener,
                 calendario.get(Calendar.YEAR),
                 calendario.get(Calendar.MONTH),
                 calendario.get(Calendar.DAY_OF_MONTH)
-            ).show()
+            )
+            // Aplica la restricción de fecha máxima
+            datePickerDialog.datePicker.maxDate = fechaMaxima
+            datePickerDialog.show()
         }
 
         //Configuración para el spinner con los objetivos de usuario
@@ -117,6 +124,8 @@ class VerPerfil : AppCompatActivity() {
                 spinnerObjetivo.isEnabled = true
 
                 botonGuardar.isEnabled = true
+
+                editar.setImageResource(R.drawable.icons8editar40blancoynegro)
             } else {
                 textoNombre.isEnabled = false
                 textoCorreo.isEnabled = false
@@ -128,9 +137,12 @@ class VerPerfil : AppCompatActivity() {
                 spinnerObjetivo.isEnabled = false
 
                 botonGuardar.isEnabled = false
+
+                editar.setImageResource(R.drawable.icons8editar40)
             }
         }
 
+        //Cargar los datos del usuario encontrado según el id
         if (usuarioId != -1) {
 
             val usuario = usuarioBD.buscarUsuarioPorID(usuarioId)
@@ -151,24 +163,34 @@ class VerPerfil : AppCompatActivity() {
             Toast.makeText(this, "Error: Usuario no encontrado", Toast.LENGTH_LONG).show()
         }
 
+        //Acción de actualizar los datos del usuario con el botón guardar
         botonGuardar.setOnClickListener {
 
+            if (textoNombre.text.toString().isEmpty() || textoCorreo.text.toString().isEmpty() || textoContrasena.text.toString().isEmpty()
+                || textoTelefono.text.toString().isEmpty() || textoAltura.text.toString().isEmpty() || textoPeso.text.toString().isEmpty()
+                || textoFecha.text.toString().isEmpty()) {
+                Toast.makeText(this, "Hay campos vacíos", Toast.LENGTH_LONG).show()
+
+            } else {
+
+                usuarioBD.actualizarUsuario(usuarioId, textoNombre.text.toString(), textoCorreo.text.toString(), textoContrasena.text.toString(),
+                    textoTelefono.text.toString(), textoAltura.text.toString().toDouble(), textoPeso.text.toString().toDouble(),
+                    textoFecha.text.toString(), spinnerObjetivo.selectedItem.toString())
+
+                Toast.makeText(this, "Usuario ${textoNombre.text} actualizado", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(this, VerPerfil::class.java)
+                startActivity(intent)
+            }
         }
 
-        val botonPerfil = findViewById<ImageView>(R.id.botonPerfil)
-        val botonInicio = findViewById<ImageView>(R.id.botonInicio)
-        val botonAgregar = findViewById<ImageView>(R.id.botonAgregar)
-        botonPerfil.setOnClickListener {
-            val intent = Intent(this, VerPerfil::class.java)
-            startActivity(intent)
-        }
-        botonInicio.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-        botonAgregar.setOnClickListener {
-            val intent = Intent(this, deportes::class.java)
-            startActivity(intent)
-        }
+        //Configuración de footer y header
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.header, Header())
+            .commit()
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.footer, Footer())
+            .commit()
     }
 }

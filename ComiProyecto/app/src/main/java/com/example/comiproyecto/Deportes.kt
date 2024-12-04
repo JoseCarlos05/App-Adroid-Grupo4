@@ -1,7 +1,6 @@
 package com.example.comiproyecto
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,10 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.comiproyecto.BasedeDatos.BDSQLite
 import com.example.comiproyecto.BasedeDatos.Modelos.Usuario
-import com.example.comiproyecto.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class deportes : AppCompatActivity() {
+class Deportes : AppCompatActivity() {
 
     private lateinit var cardAdapter: CardAdapter
     private val allCards = getCardData()  // Datos completos de las cartas
@@ -30,28 +28,26 @@ class deportes : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deportes)
 
-        //Conexión principal a la base de datos
+        // Conexión principal a la base de datos
         val db = BDSQLite(this)
         val dbH = db.writableDatabase
         val usuarioBD = Usuario(dbH)
 
-        //Se recupera el id del usuario que inició sesión
+        // Se recupera el id del usuario que inició sesión
         val sharedPreferences: SharedPreferences = getSharedPreferences("usuario", MODE_PRIVATE)
         val usuarioId = sharedPreferences.getInt("usuario_id", -1)
 
         val usuario = usuarioBD.buscarUsuarioPorID(usuarioId)
 
-
-
-
-
+        // Obtener el objetivo del usuario
+        val objetivo = usuario?.get("objetivo")?.toString()
 
         // Configuración del RecyclerView
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Establecer el adaptador inicial con todas las cartas
-        cardAdapter = CardAdapter(filteredCards)
+        // Establecer el adaptador con el objetivo del usuario
+        cardAdapter = CardAdapter(filteredCards, objetivo ?: "")
         recyclerView.adapter = cardAdapter
 
         // Encuentra el botón que abrirá el BottomSheet
@@ -69,10 +65,6 @@ class deportes : AppCompatActivity() {
             val filterOption1: Button = bottomSheetView.findViewById(R.id.filter_option_1)
             val filterOption2: Button = bottomSheetView.findViewById(R.id.filter_option_2)
             val filterOption3: Button = bottomSheetView.findViewById(R.id.filter_option_3)
-
-
-
-
 
             // Configura los listeners de los botones
             filterOption1.setOnClickListener {
@@ -94,7 +86,7 @@ class deportes : AppCompatActivity() {
             bottomSheetDialog.show()
         }
 
-        val objetivo = usuario?.get("objetivo")?.toString()
+        // Aplica el filtro según el objetivo del usuario
         when (objetivo) {
             "Tonificar" -> applyFilter(R.drawable.tonificar)
             "Bajar de peso" -> applyFilter(R.drawable.bajarpeso)
@@ -104,30 +96,17 @@ class deportes : AppCompatActivity() {
             }
         }
 
+        // Reemplazar el header y footer (si tienes esos elementos en el layout)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.header, Header())
+            .commit()
 
-        val footer = findViewById<View>(R.id.footer)
-        val botonPerfil = footer.findViewById<ImageView>(R.id.botonPerfil)
-        val botonInicio = footer.findViewById<ImageView>(R.id.botonInicio)
-        val botonAgregar = footer.findViewById<ImageView>(R.id.botonAgregar)
-
-        botonPerfil.setOnClickListener {
-            val intent = Intent(this, VerPerfil::class.java)
-            startActivity(intent)
-        }
-
-        botonInicio.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-
-        botonAgregar.setOnClickListener {
-            val intent = Intent(this, deportes::class.java)
-            startActivity(intent)
-        }
-
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.footer, Footer())
+            .commit()
     }
 
-
+    // Aplica el filtro basado en el objetivo
     private fun applyFilter(iconResId: Int) {
         filteredCards = allCards.filter { it.iconResId == iconResId }
         cardAdapter.updateData(filteredCards)  // Actualiza los datos del adaptador
@@ -182,41 +161,60 @@ class deportes : AppCompatActivity() {
                 R.drawable.masamuscular
             )
         )
-
-    }
-}
-
-// Modelo de datos
-data class CardItem(val title: String, val description: String, val iconResId: Int)
-
-// Adaptador para el RecyclerView
-class CardAdapter(private var cardList: List<CardItem>) : RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_card, parent, false)
-        return CardViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        val cardItem = cardList[position]
-        holder.titleTextView.text = cardItem.title
-        holder.descriptionTextView.text = cardItem.description
-        holder.iconImageView.setImageResource(cardItem.iconResId)
-    }
+    // Modelo de datos
+    data class CardItem(val title: String, val description: String, val iconResId: Int)
 
-    override fun getItemCount(): Int = cardList.size
+    // Adaptador para el RecyclerView
+    class CardAdapter(private var cardList: List<CardItem>, private val userGoal: String) :
+        RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
 
-    // Actualiza los datos del adaptador
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateData(newCardList: List<CardItem>) {
-        cardList = newCardList
-        notifyDataSetChanged()  // Notifica al adaptador que los datos han cambiado
-    }
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
+            val view =
+                LayoutInflater.from(parent.context).inflate(R.layout.item_card, parent, false)
+            return CardViewHolder(view)
+        }
 
-    // ViewHolder para las cartas
-    class CardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val titleTextView: TextView = view.findViewById(R.id.card_title)
-        val descriptionTextView: TextView = view.findViewById(R.id.card_description)
-        val iconImageView: ImageView = view.findViewById(R.id.card_icon)
+        override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
+            val cardItem = cardList[position]
+            holder.titleTextView.text = cardItem.title
+            holder.descriptionTextView.text = cardItem.description
+            holder.iconImageView.setImageResource(cardItem.iconResId)
+
+            // Mostrar u ocultar el texto "(Tu objetivo)" basado en la coincidencia con el objetivo del usuario
+            if (isUserGoalMatching(cardItem.iconResId)) {
+                holder.objectiveTextView.visibility = View.VISIBLE
+            } else {
+                holder.objectiveTextView.visibility = View.GONE
+            }
+        }
+
+        override fun getItemCount(): Int = cardList.size
+
+        // Verifica si el objetivo del usuario coincide con el ícono de la carta
+        private fun isUserGoalMatching(iconResId: Int): Boolean {
+            return when (userGoal) {
+                "Tonificar" -> iconResId == R.drawable.tonificar
+                "Bajar de peso" -> iconResId == R.drawable.bajarpeso
+                "Ganar masa muscular" -> iconResId == R.drawable.masamuscular
+                else -> false
+            }
+        }
+
+        // Actualiza los datos del adaptador
+        @SuppressLint("NotifyDataSetChanged")
+        fun updateData(newCardList: List<CardItem>) {
+            cardList = newCardList
+            notifyDataSetChanged()  // Notifica al adaptador que los datos han cambiado
+        }
+
+        // ViewHolder para las cartas
+        class CardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+            val titleTextView: TextView = view.findViewById(R.id.card_title)
+            val descriptionTextView: TextView = view.findViewById(R.id.card_description)
+            val iconImageView: ImageView = view.findViewById(R.id.card_icon)
+            val objectiveTextView: TextView = view.findViewById(R.id.objective_text) // Agregamos este campo
+        }
     }
 }

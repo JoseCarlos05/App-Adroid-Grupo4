@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TRACK-FIT"
+        android:text="@string/titulo"
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold|italic"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginBottom="15dp"
-                android:text="Correo electrónico: "
+                android:text="@string/correo"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
 
@@ -70,10 +70,9 @@
                     android:id="@+id/correoLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Introduce tu correo"
+                    android:hint="@string/correoText"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -82,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginBottom="15dp"
-                android:text="Contraseña: "
+                android:text="@string/contrasena"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
 
@@ -97,11 +96,10 @@
                     android:id="@+id/contrasenaLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Introduce tu contraseña"
+                    android:hint="@string/contrasenaText"
                     android:inputType="textPassword"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -113,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:text="Registrarme"
+            android:text="@string/registrarme"
             android:textStyle="bold"
             android:textColor="@color/black"/>
 
@@ -123,7 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:backgroundTint="?attr/colorButtonNormal"
-            android:text="Iniciar sesión"/>
+            android:text="@string/iniciarSesion"/>
 
     </LinearLayout>
 

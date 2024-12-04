@@ -3,8 +3,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="fondo">#ECECCA</color>
+    <color name="red">#F40202</color>
     <color name="colorbase">#ACD4B4</color>
     <color name="colorboton">#109921</color>
     <color name="colorsecciones">#6ACF78</color>
-
+    <color name="gris">#808080</color>
+    <color name="colorfecha">#52B905</color>
 </resources>

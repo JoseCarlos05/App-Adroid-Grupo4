@@ -16,8 +16,8 @@
 
             <ImageView
                 android:id="@+id/botonPerfil"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="@string/irPerfil"
@@ -25,19 +25,39 @@
 
             <ImageView
                 android:id="@+id/botonInicio"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:contentDescription="@string/irMain"
                 app:srcCompat="@drawable/icons8casa24"/>
 
             <ImageView
                 android:id="@+id/botonAgregar"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:contentDescription="@string/irComida"
                 app:srcCompat="@drawable/icons8mas50"/>
+
+            <ImageView
+                android:id="@+id/botonDeportes"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:contentDescription="@string/irDeporte"
+                app:srcCompat="@drawable/icons8running50"/>
+
+            <ImageView
+                android:id="@+id/botonEstadistica"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:contentDescription="@string/irEstadts"
+                app:srcCompat="@drawable/icons8diagram64"/>
 
         </LinearLayout>
 

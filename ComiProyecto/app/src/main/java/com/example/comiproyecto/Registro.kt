@@ -16,7 +16,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.comiproyecto.BasedeDatos.BDSQLite
 import com.example.comiproyecto.BasedeDatos.Modelos.Usuario
-import com.example.comiproyecto.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -33,10 +32,12 @@ class Registro : AppCompatActivity() {
             insets
         }
 
+        //Conexión con la base de datos y el modelo usuario
         val db = BDSQLite(this)
         val dbW = db.writableDatabase
         val usuarioBD = Usuario(dbW)
 
+        //Se declaran EditTexts, ImageViews y botones del xml
         val textoNombre = findViewById<EditText>(R.id.campoNombre)
         val textoCorreo = findViewById<EditText>(R.id.campoCorreo)
         val textoContrasena = findViewById<EditText>(R.id.campoContrasena)
@@ -49,6 +50,7 @@ class Registro : AppCompatActivity() {
 
         val spinnerObjetivo: Spinner = findViewById(R.id.spObjetivo)
 
+        //Configuración para el spinner con los objetivos de usuario
         val objetivos = resources.getStringArray(R.array.objetivos_array)
         val adapter = ArrayAdapter(
             this,
@@ -58,7 +60,13 @@ class Registro : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerObjetivo.adapter = adapter
 
+        //Configuración para el campo de fecha
         val calendario = Calendar.getInstance()
+
+        // Establece la fecha máxima para evitar que se seleccione una fecha de menos de 5 años
+        calendario.add(Calendar.YEAR, -5)
+        val fechaMaxima = calendario.timeInMillis
+        calendario.add(Calendar.YEAR, 5)
 
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             calendario.set(Calendar.YEAR, year)
@@ -70,26 +78,40 @@ class Registro : AppCompatActivity() {
         }
 
         fecha.setOnClickListener {
-            DatePickerDialog(
+            val datePickerDialog = DatePickerDialog(
                 this,
                 dateSetListener,
                 calendario.get(Calendar.YEAR),
                 calendario.get(Calendar.MONTH),
                 calendario.get(Calendar.DAY_OF_MONTH)
-            ).show()
+            )
+            // Aplica la restricción de fecha máxima
+            datePickerDialog.datePicker.maxDate = fechaMaxima
+            datePickerDialog.show()
         }
 
+        //Acción del botón de retroceso
         botonAtras.setOnClickListener {
             val intent = Intent(this, InicioSesion::class.java)
             startActivity(intent)
         }
 
+        //Acción de registro de usuario
         botonRegistrar.setOnClickListener {
 
             if (textoNombre.text.toString().isEmpty() || textoCorreo.text.toString().isEmpty() || textoContrasena.text.toString().isEmpty()
                 || textoTelefono.text.toString().isEmpty() || textoAltura.text.toString().isEmpty() || textoPeso.text.toString().isEmpty()
                 || fecha.text.toString().isEmpty()) {
                 Toast.makeText(this, "Hay campos vacíos", Toast.LENGTH_LONG).show()
+
+            } else if (usuarioBD.comprobarUsuarioNombre(textoNombre.text.toString())) {
+                Toast.makeText(this, "Este nombre de usuario ya está en uso", Toast.LENGTH_LONG).show()
+
+            } else if (usuarioBD.comprobarUsuarioCorreo(textoCorreo.text.toString())) {
+                Toast.makeText(this, "Ya hay un usuario con este correo electrónico", Toast.LENGTH_LONG).show()
+
+            } else if (usuarioBD.comprobarUsuarioTelefono(textoTelefono.text.toString())) {
+                Toast.makeText(this, "Ya hay un usuario con este teléfono en uso", Toast.LENGTH_LONG).show()
 
             } else {
 

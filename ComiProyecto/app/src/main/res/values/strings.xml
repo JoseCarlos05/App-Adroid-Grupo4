@@ -1,18 +1,55 @@
 <resources>
-    <string name="app_name">ComiProyecto</string>
+    <string name="app_name">Track-Fit</string>
     <string name="perfil">Foto de perfil</string>
     <string name="editar">Editar perfil</string>
     <string name="guardar">Guardar cambios</string>
     <string name="nombrePerfil">Nombre: </string>
     <string name="correoPerfil">Correo: </string>
+    <string name="contrasenaPerfil">Contraseña: </string>
     <string name="telefonoPerfil">Teléfono: </string>
     <string name="alturaPerfil">Altura: </string>
     <string name="pesoPerfil">Peso: </string>
     <string name="fechnacPerfil">Fecha de nacimiento: </string>
     <string name="irPerfil">Ir a perfil de usuario</string>
+    <string name="irMain">Ir a resumen de comidas</string>
+    <string name="irComida">Ir a añadir comida</string>
+    <string name="irDeporte">Ir a deportes</string>
+    <string name="irEstadts">Ir a las estadísticas del usuario</string>
     <string-array name="objetivos_array">
         <item>Tonificar</item>
         <item>Bajar de peso</item>
         <item>Ganar masa muscular</item>
     </string-array>
+    <string name="anadir">Añadir</string>
+    <string name="info">Info</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="icono">Icono de la aplicación</string>
+    <string name="configuracion">Configuración</string>
+    <string name="registro">Registro</string>
+    <string name="rNombre">Nombre</string>
+    <string name="rNombreE">Introduce tu nombre</string>
+    <string name="rCorreo">Correo</string>
+    <string name="rCorreoE">Introduce tu correo</string>
+    <string name="rContrasena">Contraseña</string>
+    <string name="rContrasenaE">Introduce tu contrasena</string>
+    <string name="rTelef">Teléfono</string>
+    <string name="rTelefE">Introduce tu teléfono</string>
+    <string name="rAltura">Altura (cm)</string>
+    <string name="rAlturaE">Introduce tu teléfono</string>
+    <string name="rPeso">Peso (kg)</string>
+    <string name="rPesoE">Introduce tu peso</string>
+    <string name="rFecha">Fecha de nacimiento</string>
+    <string name="rFechaE">Selecciona tu fecha de nacimiento</string>
+    <string name="rObjetivo">Objetivo</string>
+    <string name="btRegistro">Registrar</string>
+    <string name="titulo">TRACK-FIT</string>
+    <string name="correo">Correo electrónico: </string>
+    <string name="correoText">Introduce tu correo</string>
+    <string name="contrasena">Contraseña: </string>
+    <string name="contrasenaText">Introduce tu contraseña</string>
+    <string name="registrarme">Registrarme</string>
+    <string name="iniciarSesion">Iniciar sesión</string>
+    <string name="titulocarta">Título de la carta</string>
+    <string name="descripciondelacarta">Descripción de la carta</string>
+    <string name="tuobj">(Tu objetivo)</string>
 </resources>

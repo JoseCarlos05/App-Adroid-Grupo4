@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -29,13 +30,14 @@
                 android:id="@+id/botonAtras"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:contentDescription="@string/registro"
                 android:src="@drawable/icons8flecha90"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Nombre"
+                android:text="@string/rNombre"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -44,8 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/estilodatologin"
-                android:hint="Introduce tu nombre"
-                android:minHeight="48dp"
+                android:hint="@string/rNombreE"
                 android:padding="10dp"
                 android:textColor="@color/black" />
 
@@ -53,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Correo electrónico"
+                android:text="@string/rCorreo"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -62,9 +63,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/estilodatologin"
-                android:hint="Introduce tu correo"
+                android:hint="@string/rCorreoE"
                 android:inputType="textEmailAddress"
-                android:minHeight="48dp"
                 android:padding="10dp"
                 android:textColor="@color/black" />
 
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Contraseña"
+                android:text="@string/rContrasena"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -81,9 +81,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/estilodatologin"
-                android:hint="Introduce tu contraseña"
+                android:hint="@string/rContrasenaE"
                 android:inputType="textPassword"
-                android:minHeight="48dp"
                 android:padding="10dp"
                 android:textColor="@color/black" />
 
@@ -91,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Teléfono"
+                android:text="@string/rTelef"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -100,9 +99,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/estilodatologin"
-                android:hint="Introduce tu teléfono"
+                android:hint="@string/rTelefE"
                 android:inputType="phone"
-                android:minHeight="48dp"
                 android:padding="10dp"
                 android:textColor="@color/black" />
 
@@ -110,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Altura (cm)"
+                android:text="@string/rAltura"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -119,9 +117,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/estilodatologin"
-                android:hint="Introduce tu altura"
+                android:hint="@string/rAlturaE"
                 android:inputType="numberDecimal"
-                android:minHeight="48dp"
                 android:padding="10dp"
                 android:textColor="@color/black" />
 
@@ -129,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Peso (kg)"
+                android:text="@string/rPeso"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -138,9 +135,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/estilodatologin"
-                android:hint="Introduce tu peso"
+                android:hint="@string/rPesoE"
                 android:inputType="numberDecimal"
-                android:minHeight="48dp"
                 android:padding="10dp"
                 android:textColor="@color/black" />
 
@@ -148,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Fecha de nacimiento"
+                android:text="@string/rFecha"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
 
@@ -156,11 +152,10 @@
                 android:id="@+id/campoFechaNacimiento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/estilodatologin"
-                android:clickable="true"
+                android:hint="@string/rFechaE"
                 android:focusable="false"
-                android:hint="Selecciona tu fecha de nacimiento"
-                android:minHeight="48dp"
+                android:clickable="true"
+                android:background="@drawable/estilodatologin"
                 android:padding="10dp"
                 android:textColor="@color/black" />
 
@@ -168,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Objetivo"
+                android:text="@string/rObjetivo"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -177,7 +172,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/estilodatologin"
-                android:minHeight="48dp"
                 android:padding="10dp" />
 
             <Button
@@ -186,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="?attr/colorButtonNormal"
-                android:text="Registrar"
+                android:text="@string/btRegistro"
                 android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
