@@ -15,7 +15,7 @@
             android:id="@+id/NombreComida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre de la comida"
+            android:text="@string/nombreLista"
             android:textSize="14sp"
             android:textColor="@color/black" />
 
@@ -23,7 +23,7 @@
             android:id="@+id/CantidadComida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cantidad"
+            android:text="@string/cantidadLista"
             android:textSize="14sp"
             android:textColor="@color/black"
             android:layout_below="@id/NombreComida" />
@@ -32,7 +32,7 @@
             android:id="@+id/NutrientesComida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calorías"
+            android:text="@string/caloriasLista"
             android:textSize="14sp"
             android:textColor="@color/gris"
             android:layout_below="@id/CantidadComida"/>
