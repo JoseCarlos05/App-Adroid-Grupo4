@@ -113,7 +113,11 @@ class Registro : AppCompatActivity() {
             } else if (usuarioBD.comprobarUsuarioTelefono(textoTelefono.text.toString())) {
                 Toast.makeText(this, "Ya hay un usuario con este teléfono en uso", Toast.LENGTH_LONG).show()
 
-            } else {
+            } else if (textoTelefono.text.toString().length != 9) {
+                Toast.makeText(this, "Número de teléfono inválido", Toast.LENGTH_LONG).show()
+            }
+
+            else {
 
                 usuarioBD.insertarUsuario(textoNombre.text.toString(), textoCorreo.text.toString(), textoContrasena.text.toString(),
                     textoTelefono.text.toString(), textoAltura.text.toString().toDouble(), textoPeso.text.toString().toDouble(),

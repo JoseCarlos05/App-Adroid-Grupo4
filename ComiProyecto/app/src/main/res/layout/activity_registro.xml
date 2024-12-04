@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/estilodatologin"
                 android:hint="@string/rAlturaE"
-                android:inputType="numberDecimal"
+                android:inputType="phone"
                 android:padding="10dp"
                 android:textColor="@color/black" />
 
