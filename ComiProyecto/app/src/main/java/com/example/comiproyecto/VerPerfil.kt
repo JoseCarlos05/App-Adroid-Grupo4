@@ -171,6 +171,18 @@ class VerPerfil : AppCompatActivity() {
                 || textoFecha.text.toString().isEmpty()) {
                 Toast.makeText(this, "Hay campos vacíos", Toast.LENGTH_LONG).show()
 
+            } else if (usuarioBD.comprobarUsuarioNombre(textoNombre.text.toString())) {
+                Toast.makeText(this, "Este nombre de usuario ya está en uso", Toast.LENGTH_LONG).show()
+
+            } else if (usuarioBD.comprobarUsuarioCorreo(textoCorreo.text.toString())) {
+                Toast.makeText(this, "Ya hay un usuario con este correo electrónico", Toast.LENGTH_LONG).show()
+
+            } else if (usuarioBD.comprobarUsuarioTelefono(textoTelefono.text.toString())) {
+                Toast.makeText(this, "Ya hay un usuario con este teléfono en uso", Toast.LENGTH_LONG).show()
+
+            } else if (textoTelefono.text.toString().length != 9) {
+                Toast.makeText(this, "Número de teléfono inválido", Toast.LENGTH_LONG).show()
+
             } else {
 
                 usuarioBD.actualizarUsuario(usuarioId, textoNombre.text.toString(), textoCorreo.text.toString(), textoContrasena.text.toString(),
