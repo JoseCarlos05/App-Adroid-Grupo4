@@ -2,7 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ComiProyecto" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="colorButtonNormal">@color/colorboton</item>
+        <item name="android:statusBarColor">@color/fondo</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/fondo</item>
     </style>
 </resources>
