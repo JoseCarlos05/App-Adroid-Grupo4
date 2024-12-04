@@ -1,5 +1,6 @@
 package com.example.comiproyecto
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,17 +78,18 @@ class ComidaAdapt(private val listaComidas: List<Map<String, Any>>) :
         private val nutrientes: TextView = itemView.findViewById(R.id.NutrientesComida)
         private val imagenInfo: ImageView = itemView.findViewById(R.id.imagenInfo)
 
+        @SuppressLint("SetTextI18n")
         fun bind(comida: Map<String, Any>) {
             nombre.text = comida["nombre"].toString()
-            cantidad.text = comida["cantidad"].toString()
+            cantidad.text = comida["cantidad"].toString() + " g"
             val cantidad = comida["cantidad"] as? Int ?: 1
 
-            val calorias = (comida["calorias"] as? Int ?: 0) * cantidad
-            val proteinas = (comida["proteinas"] as? Double ?: 0.0) * cantidad
-            val carbohidratos = (comida["carbohidratos"] as? Double ?: 0.0) * cantidad
-            val grasas = (comida["grasas"] as? Double ?: 0.0) * cantidad
-            val vitaminas = (comida["vitaminas"] as? Double ?: 0.0) * cantidad
-            val minerales = (comida["minerales"] as? Double ?: 0.0) * cantidad
+            val calorias = (comida["calorias"] as? Int ?: 0) * cantidad / 100
+            val proteinas = (comida["proteinas"] as? Double ?: 0.0) * cantidad / 100
+            val carbohidratos = (comida["carbohidratos"] as? Double ?: 0.0) * cantidad / 100
+            val grasas = (comida["grasas"] as? Double ?: 0.0) * cantidad / 100
+            val vitaminas = (comida["vitaminas"] as? Double ?: 0.0) * cantidad / 100
+            val minerales = (comida["minerales"] as? Double ?: 0.0) * cantidad / 100
 
             nutrientes.text = "Calorías: $calorias kcal"
 

@@ -3,6 +3,7 @@ package com.example.comiproyecto
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.comiproyecto.BasedeDatos.BDSQLite
+import com.example.comiproyecto.BasedeDatos.Modelos.Deporte
 import com.example.comiproyecto.BasedeDatos.Modelos.Usuario
 import com.example.comiproyecto.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -22,25 +24,33 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 class Deportes : AppCompatActivity() {
 
     private lateinit var cardAdapter: CardAdapter
-    private val allCards = getCardData()  // Datos completos de las cartas
-    private var filteredCards = allCards  // Lista que almacena las cartas filtradas
+    private var allCards: List<CardItem> = listOf() // Inicialmente vacía
+    private var filteredCards: List<CardItem> = listOf() // Lista que almacena las cartas filtradas
 
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deportes)
 
-        //Conexión principal a la base de datos
+        // Conexión principal a la base de datos
         val db = BDSQLite(this)
         val dbH = db.writableDatabase
         val usuarioBD = Usuario(dbH)
 
-        //Se recupera el id del usuario que inició sesión
+        // Inserta deportes hardcodeados si no existen
+        Deporte.insertarDeportesHardcodeados(dbH)
+
+        // Se recupera el id del usuario que inició sesión
         val sharedPreferences: SharedPreferences = getSharedPreferences("usuario", MODE_PRIVATE)
         val usuarioId = sharedPreferences.getInt("usuario_id", -1)
 
         val usuario = usuarioBD.buscarUsuarioPorID(usuarioId)
 
+        Deporte.insertarDeportesUsuario(dbH, usuarioId)
+
+        // Obtén los datos desde la base de datos y asigna a las listas
+        allCards = getCardsFromDatabase(dbH)
+        filteredCards = allCards // Inicialmente muestra todas las cartas
 
         // Configuración del RecyclerView
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
@@ -68,17 +78,17 @@ class Deportes : AppCompatActivity() {
 
             // Configura los listeners de los botones
             filterOption1.setOnClickListener {
-                applyFilter(R.drawable.bajarpeso) // Aplica el filtro 1
+                applyFilter("Bajar de peso") // Aplica el filtro 1
                 bottomSheetDialog.dismiss()
             }
 
             filterOption2.setOnClickListener {
-                applyFilter(R.drawable.tonificar) // Aplica el filtro 2
+                applyFilter("Tonificar") // Aplica el filtro 2
                 bottomSheetDialog.dismiss()
             }
 
             filterOption3.setOnClickListener {
-                applyFilter(R.drawable.masamuscular) // Aplica el filtro 3
+                applyFilter("Ganar masa muscular") // Aplica el filtro 3
                 bottomSheetDialog.dismiss()
             }
 
@@ -87,13 +97,10 @@ class Deportes : AppCompatActivity() {
         }
 
         val objetivo = usuario?.get("objetivo")?.toString()
-        when (objetivo) {
-            "Tonificar" -> applyFilter(R.drawable.tonificar)
-            "Bajar de peso" -> applyFilter(R.drawable.bajarpeso)
-            "Ganar masa muscular" -> applyFilter(R.drawable.masamuscular)
-            else -> {
-                Toast.makeText(this, "Objetivo no reconocido", Toast.LENGTH_SHORT).show()
-            }
+        if (objetivo != null) {
+            applyFilter(objetivo)
+        } else {
+            Toast.makeText(this, "Objetivo no reconocido", Toast.LENGTH_SHORT).show()
         }
 
         supportFragmentManager.beginTransaction()
@@ -105,63 +112,41 @@ class Deportes : AppCompatActivity() {
             .commit()
     }
 
+    // Obtiene los datos desde la base de datos
+    private fun getCardsFromDatabase(db: SQLiteDatabase): List<CardItem> {
+        val cardItems = mutableListOf<CardItem>()
+        val cursor = db.query("deporte", null, null, null, null, null, null)
 
-    private fun applyFilter(iconResId: Int) {
-        filteredCards = allCards.filter { it.iconResId == iconResId }
-        cardAdapter.updateData(filteredCards)  // Actualiza los datos del adaptador
+        while (cursor.moveToNext()) {
+            val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
+            val descripcion = cursor.getString(cursor.getColumnIndexOrThrow("descripcion"))
+            val objetivo = cursor.getString(cursor.getColumnIndexOrThrow("objetivo"))
+
+            // Asocia el objetivo con un icono correspondiente
+            val iconResId = when (objetivo) {
+                "Bajar de peso" -> R.drawable.bajarpeso
+                "Tonificar" -> R.drawable.tonificar
+                "Ganar masa muscular" -> R.drawable.masamuscular
+                else -> R.drawable.icons8running50 // Icono por defecto en caso de no coincidir
+            }
+
+            cardItems.add(CardItem(nombre, descripcion, iconResId))
+        }
+        cursor.close()
+        return cardItems
     }
 
-    // Datos de ejemplo para mostrar
-    private fun getCardData(): List<CardItem> {
-        return listOf(
-            CardItem(
-                "Flexiones",
-                "Ejercicio que trabaja pecho, hombros y tríceps. Realiza 5 repeticiones durante 5 minutos, asegurándote de mantener la espalda recta y bajar el pecho sin tocar el suelo.",
-                R.drawable.bajarpeso
-            ),
-            CardItem(
-                "Abdominales",
-                "Fortalece el core. Haz 8 repeticiones de crunches, descansando 5 minutos entre series. Mantén la espalda recta y respira controladamente.",
-                R.drawable.tonificar
-            ),
-            CardItem(
-                "Burpees",
-                "Ejercicio de cuerpo completo que mejora la resistencia. Realiza 10 repeticiones durante 10 minutos, asegurándote de mantener una postura adecuada para evitar lesiones.",
-                R.drawable.masamuscular
-            ),
-            CardItem(
-                "Correr",
-                "Ejercicio cardiovascular que mejora la resistencia. Corre durante 20 minutos, mantén una postura erguida y respira de manera controlada.",
-                R.drawable.bajarpeso
-            ),
-            CardItem(
-                "Saltar",
-                "Mejora la explosividad y coordinación. Haz 20 repeticiones de saltos durante 8 minutos, manteniendo las rodillas ligeramente dobladas al aterrizar.",
-                R.drawable.tonificar
-            ),
-            CardItem(
-                "Saltar",
-                "Trabaja la fuerza en las piernas. Realiza 3 repeticiones de saltos durante 6 minutos, saltando con control para evitar impacto en las rodillas.",
-                R.drawable.masamuscular
-            ),
-            CardItem(
-                "Dominadas",
-                "Fortalece la espalda y los bíceps. Haz 12 repeticiones, descansando 11 minutos entre series. Usa asistencia si eres principiante.",
-                R.drawable.bajarpeso
-            ),
-            CardItem(
-                "Balón medicinal",
-                "Ejercicio funcional que trabaja el core y los hombros. Realiza 8 repeticiones de lanzamientos o giros con el balón durante 5 minutos.",
-                R.drawable.tonificar
-            ),
-            CardItem(
-                "Comba",
-                "Mejora la coordinación y cardiovascular. Haz 20 repeticiones de saltos durante 7 minutos, saltando con suavidad para proteger las articulaciones.",
-                R.drawable.masamuscular
-            )
-        )
-
+    // Aplica el filtro basado en el objetivo
+    private fun applyFilter(objetivo: String) {
+        filteredCards = allCards.filter { it.iconResId == when (objetivo) {
+            "Bajar de peso" -> R.drawable.bajarpeso
+            "Tonificar" -> R.drawable.tonificar
+            "Ganar masa muscular" -> R.drawable.masamuscular
+            else -> R.drawable.icons8running50
+        }}
+        cardAdapter.updateData(filteredCards)
     }
+
 }
 
 // Modelo de datos

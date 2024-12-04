@@ -35,6 +35,7 @@ class BDSQLite(contexto: Context) : SQLiteOpenHelper(contexto, nombreBD, null, v
         db.execSQL("CREATE TABLE deporte (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "nombre TEXT, " +
+                "descripcion TEXT, " +
                 "objetivo TEXT CHECK(objetivo IN ('Tonificar', 'Bajar de peso', 'Ganar masa muscular')))");
         db.execSQL("CREATE TABLE usuario_comida (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
