@@ -41,16 +41,20 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.footer, Footer())
             .commit()
-
+        // Crea una instancia de la clase BDSQLite para interactuar con la base de datos SQLite
         val baseDatos = BDSQLite(this)
+        // modelo de usuario que interactúa con la base de datos
         val usuarioModel = Usuario(baseDatos.readableDatabase)
 
+        // Accede a las preferencias compartidas para obtener el ID del usuario actual
         val sharedPreferences: SharedPreferences = getSharedPreferences("usuario", MODE_PRIVATE)
         val idUsuario = sharedPreferences.getInt("usuario_id", -1)
-
+        // Obtiene las comidas asociadas al usuario a partir de la base de datos
         val comidas = usuarioModel.obtenerComidasDeUsuario(idUsuario)
+        // Configura el RecyclerView para mostrar las comidas
         val recyclerView: RecyclerView = findViewById(R.id.recyclerComidas)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        // Crea el adaptador y lo asigna al RecyclerView
         val adaptador = ComidaAdapt(comidas)
         recyclerView.adapter = adaptador
     }

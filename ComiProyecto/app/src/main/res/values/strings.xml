@@ -49,4 +49,12 @@
     <string name="contrasenaText">Introduce tu contraseña</string>
     <string name="registrarme">Registrarme</string>
     <string name="iniciarSesion">Iniciar sesión</string>
+
+    <!-- Strings para la lista_comida -->
+    <string name="fechaMain">fecha</string>
+    <string name="nombreLista">Nombre de la comida</string>
+    <string name="cantidadLista">Cantidad</string>
+    <string name="caloriasLista">Calorías</string>
+
+
 </resources>
