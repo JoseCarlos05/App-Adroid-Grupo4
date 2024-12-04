@@ -53,4 +53,11 @@
     <string name="nombreLista">Nombre de la comida</string>
     <string name="cantidadLista">Cantidad</string>
     <string name="caloriasLista">Calorías</string>
+    <string name="titulocarta">Título de la carta</string>
+    <string name="descripciondelacarta">Descripción de la carta</string>
+    <string name="tuobj">(Tu objetivo)</string>
+    <string name="tonificar">(Tu objetivo)</string>
+    <string name="bajarpeso">(Tu objetivo)</string>
+    <string name="ganarmusc">(Tu objetivo)</string>
+    <string name="selectObj">(Tu objetivo)</string>
 </resources>
