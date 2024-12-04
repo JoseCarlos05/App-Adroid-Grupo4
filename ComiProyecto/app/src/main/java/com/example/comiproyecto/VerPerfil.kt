@@ -58,6 +58,11 @@ class VerPerfil : AppCompatActivity() {
         //Configuración para el campo de fecha
         val calendario = Calendar.getInstance()
 
+        // Establece la fecha máxima para evitar que se seleccione una fecha de menos de 5 años
+        calendario.add(Calendar.YEAR, -5)
+        val fechaMaxima = calendario.timeInMillis
+        calendario.add(Calendar.YEAR, 5)
+
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             calendario.set(Calendar.YEAR, year)
             calendario.set(Calendar.MONTH, month)
@@ -68,13 +73,16 @@ class VerPerfil : AppCompatActivity() {
         }
 
         textoFecha.setOnClickListener {
-            DatePickerDialog(
+            val datePickerDialog = DatePickerDialog(
                 this,
                 dateSetListener,
                 calendario.get(Calendar.YEAR),
                 calendario.get(Calendar.MONTH),
                 calendario.get(Calendar.DAY_OF_MONTH)
-            ).show()
+            )
+            // Aplica la restricción de fecha máxima
+            datePickerDialog.datePicker.maxDate = fechaMaxima
+            datePickerDialog.show()
         }
 
         //Configuración para el spinner con los objetivos de usuario
@@ -116,6 +124,8 @@ class VerPerfil : AppCompatActivity() {
                 spinnerObjetivo.isEnabled = true
 
                 botonGuardar.isEnabled = true
+
+                editar.setImageResource(R.drawable.icons8editar40blancoynegro)
             } else {
                 textoNombre.isEnabled = false
                 textoCorreo.isEnabled = false
@@ -127,6 +137,8 @@ class VerPerfil : AppCompatActivity() {
                 spinnerObjetivo.isEnabled = false
 
                 botonGuardar.isEnabled = false
+
+                editar.setImageResource(R.drawable.icons8editar40)
             }
         }
 
