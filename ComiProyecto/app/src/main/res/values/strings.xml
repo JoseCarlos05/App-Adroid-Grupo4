@@ -62,4 +62,5 @@
     <string name="ganarmusc">Ganar masa muscular</string>
     <string name="selectObj">Selecciona un objetivo</string>
     <string name="botonObj">Objetivo</string>
+    <string name="sinComida">Historial vacío… Pulsa en + para empezar con la dieta</string>
 </resources>

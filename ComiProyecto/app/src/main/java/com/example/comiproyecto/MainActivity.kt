@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.PopupMenu
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.footer, Footer())
             .commit()
+
         // Crea una instancia de la clase BDSQLite para interactuar con la base de datos SQLite
         val baseDatos = BDSQLite(this)
         // modelo de usuario que interactúa con la base de datos
@@ -51,11 +53,22 @@ class MainActivity : AppCompatActivity() {
         val idUsuario = sharedPreferences.getInt("usuario_id", -1)
         // Obtiene las comidas asociadas al usuario a partir de la base de datos
         val comidas = usuarioModel.obtenerComidasDeUsuario(idUsuario)
+
         // Configura el RecyclerView para mostrar las comidas
         val recyclerView: RecyclerView = findViewById(R.id.recyclerComidas)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        // Crea el adaptador y lo asigna al RecyclerView
-        val adaptador = ComidaAdapt(comidas)
-        recyclerView.adapter = adaptador
+        val emptyMessage: TextView = findViewById(R.id.empty_message)
+
+        // Si no hay comidas, mostrar el mensaje vacío
+        if (comidas.isEmpty()) {
+            recyclerView.visibility = View.GONE
+            emptyMessage.visibility = View.VISIBLE
+        } else {
+            recyclerView.visibility = View.VISIBLE
+            emptyMessage.visibility = View.GONE
+            recyclerView.layoutManager = LinearLayoutManager(this)
+            // Crea el adaptador y lo asigna al RecyclerView
+            val adaptador = ComidaAdapt(comidas)
+            recyclerView.adapter = adaptador
+        }
     }
 }
