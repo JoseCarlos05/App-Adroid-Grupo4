@@ -54,10 +54,12 @@
     <string name="cantidadLista">Cantidad</string>
     <string name="caloriasLista">Calorías</string>
     <string name="titulocarta">Título de la carta</string>
+    <string name="iconocarta">Icono</string>
     <string name="descripciondelacarta">Descripción de la carta</string>
-    <string name="tuobj">(Tu objetivo)</string>
-    <string name="tonificar">(Tu objetivo)</string>
-    <string name="bajarpeso">(Tu objetivo)</string>
-    <string name="ganarmusc">(Tu objetivo)</string>
-    <string name="selectObj">(Tu objetivo)</string>
+    <string name="tuobj">Para ti</string>
+    <string name="tonificar">Tonificar</string>
+    <string name="bajarpeso">Bajar de peso</string>
+    <string name="ganarmusc">Ganar masa muscular</string>
+    <string name="selectObj">Selecciona un objetivo</string>
+    <string name="botonObj">Objetivo</string>
 </resources>
