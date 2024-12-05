@@ -83,7 +83,7 @@ class Estadistica : AppCompatActivity() {
 
         //Configuración de la línea de la media de calorías
         Log.d("Objetivo", tmb.toString())
-        val limitLine = LimitLine(tmb.toFloat(), "Media de calorías ($tmb kcal). Objetivo: $objetivo")
+        val limitLine = LimitLine(tmb.toFloat(), "Objetivo de medía ($tmb kcal): $objetivo")
         limitLine.lineColor = R.color.black
         limitLine.lineWidth = 2f
         limitLine.textSize = 12f
