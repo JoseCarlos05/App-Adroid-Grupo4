@@ -49,12 +49,18 @@
     <string name="contrasenaText">Introduce tu contraseña</string>
     <string name="registrarme">Registrarme</string>
     <string name="iniciarSesion">Iniciar sesión</string>
-
-    <!-- Strings para la lista_comida -->
     <string name="fechaMain">fecha</string>
     <string name="nombreLista">Nombre de la comida</string>
     <string name="cantidadLista">Cantidad</string>
     <string name="caloriasLista">Calorías</string>
-
-
+    <string name="titulocarta">Título de la carta</string>
+    <string name="iconocarta">Icono</string>
+    <string name="descripciondelacarta">Descripción de la carta</string>
+    <string name="tuobj">Para ti</string>
+    <string name="tonificar">Tonificar</string>
+    <string name="bajarpeso">Bajar de peso</string>
+    <string name="ganarmusc">Ganar masa muscular</string>
+    <string name="selectObj">Selecciona un objetivo</string>
+    <string name="botonObj">Objetivo</string>
+    <string name="sinComida">Historial vacío… Pulsa en + para empezar con la dieta</string>
 </resources>

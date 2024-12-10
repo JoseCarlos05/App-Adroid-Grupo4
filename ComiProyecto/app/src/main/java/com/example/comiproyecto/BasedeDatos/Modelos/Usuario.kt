@@ -2,7 +2,11 @@ package com.example.comiproyecto.BasedeDatos.Modelos
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.example.comiproyecto.BasedeDatos.BDSQLite
+import java.time.LocalDate
+import java.time.Period
 
 class Usuario(private val db: SQLiteDatabase) {
 
@@ -137,5 +141,20 @@ class Usuario(private val db: SQLiteDatabase) {
         }
         cursor.close()
         return comidas
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun calcularEdad(fechaNacimiento: String): Int {
+        // Convertir la fecha de nacimiento (String) a LocalDate
+        val fechaNacimientoLocalDate = LocalDate.parse(fechaNacimiento)  // Asegúrate de que el formato sea "yyyy-MM-dd"
+
+        // Obtener la fecha actual
+        val fechaActual = LocalDate.now()
+
+        // Calcular la diferencia entre las dos fechas
+        val periodo = Period.between(fechaNacimientoLocalDate, fechaActual)
+
+        // La edad es el valor de los años en el periodo calculado
+        return periodo.years
     }
 }

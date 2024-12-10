@@ -78,6 +78,7 @@ class ComidaAdapt(private val listaComidas: List<Map<String, Any>>) :
             }
         }
     }
+
     // ViewHolder para los elementos de comida
     class ComidaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nombre: TextView = itemView.findViewById(R.id.NombreComida)
@@ -89,16 +90,15 @@ class ComidaAdapt(private val listaComidas: List<Map<String, Any>>) :
         @SuppressLint("SetTextI18n")
         fun bind(comida: Map<String, Any>) {
             nombre.text = comida["nombre"].toString()
-            cantidad.text = comida["cantidad"].toString()
-            // Calcula las cantidades totales de nutrientes según la cantidad de la comida
+            cantidad.text = comida["cantidad"].toString() + " g"
             val cantidad = comida["cantidad"] as? Int ?: 1
-
-            val calorias = (comida["calorias"] as? Int ?: 0) * cantidad
-            val proteinas = (comida["proteinas"] as? Double ?: 0.0) * cantidad
-            val carbohidratos = (comida["carbohidratos"] as? Double ?: 0.0) * cantidad
-            val grasas = (comida["grasas"] as? Double ?: 0.0) * cantidad
-            val vitaminas = (comida["vitaminas"] as? Double ?: 0.0) * cantidad
-            val minerales = (comida["minerales"] as? Double ?: 0.0) * cantidad
+            // Calcula las cantidades totales de nutrientes según la cantidad de la comida
+            val calorias = (comida["calorias"] as? Int ?: 0) * cantidad / 100
+            val proteinas = (comida["proteinas"] as? Double ?: 0.0) * cantidad / 100
+            val carbohidratos = (comida["carbohidratos"] as? Double ?: 0.0) * cantidad / 100
+            val grasas = (comida["grasas"] as? Double ?: 0.0) * cantidad / 100
+            val vitaminas = (comida["vitaminas"] as? Double ?: 0.0) * cantidad / 100
+            val minerales = (comida["minerales"] as? Double ?: 0.0) * cantidad / 100
             // Muestra las calorías en el TextView
             nutrientes.text = "Calorías: $calorias kcal"
             // Configura el clic en la imagen para mostrar más detalles en un diálogo
@@ -107,7 +107,7 @@ class ComidaAdapt(private val listaComidas: List<Map<String, Any>>) :
                 val dialogView = LayoutInflater.from(itemView.context).inflate(R.layout.dialog_comida_info, null)
                 val dialogNombreComida: TextView = dialogView.findViewById(R.id.dialogNombreComida)
                 val dialogInfoComida: TextView = dialogView.findViewById(R.id.dialogInfoComida)
-                // Asigna los datos al diálogo
+
                 dialogNombreComida.text = comida["nombre"].toString()
                 dialogInfoComida.text = "Calorías: $calorias kcal\nProteínas: ${String.format("%.2f", proteinas)} g\nCarbohidratos: ${String.format("%.2f", carbohidratos)} g\nGrasas: ${String.format("%.2f", grasas)} g\nVitaminas: ${String.format("%.2f", vitaminas)} g\nMinerales: ${String.format("%.2f", minerales)} g"
 

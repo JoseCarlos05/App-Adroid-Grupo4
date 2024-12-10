@@ -42,7 +42,7 @@ class BDSQLite(contexto: Context) : SQLiteOpenHelper(contexto, nombreBD, null, v
                 "id_usuario INTEGER, " +
                 "id_comida INTEGER, " +
                 "fecha TIMESTAMP, " +
-                "cantidad INTEGER, " +
+                "cantidad REAL, " +
                 "FOREIGN KEY (id_usuario) REFERENCES usuarios(id), " +
                 "FOREIGN KEY (id_comida) REFERENCES comida(id))");
         db.execSQL("CREATE TABLE usuario_deporte (" +

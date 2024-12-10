@@ -165,24 +165,54 @@ class VerPerfil : AppCompatActivity() {
 
         //Acción de actualizar los datos del usuario con el botón guardar
         botonGuardar.setOnClickListener {
+            val nuevoNombre = textoNombre.text.toString()
+            val nuevoCorreo = textoCorreo.text.toString()
+            val nuevoTelefono = textoTelefono.text.toString()
 
-            if (textoNombre.text.toString().isEmpty() || textoCorreo.text.toString().isEmpty() || textoContrasena.text.toString().isEmpty()
-                || textoTelefono.text.toString().isEmpty() || textoAltura.text.toString().isEmpty() || textoPeso.text.toString().isEmpty()
-                || textoFecha.text.toString().isEmpty()) {
+            val usuario = usuarioBD.buscarUsuarioPorID(usuarioId)
+            val nombreOriginal = usuario?.get("nombre").toString()
+            val correoOriginal = usuario?.get("correo").toString()
+            val telefonoOriginal = usuario?.get("telefono").toString()
+
+            // Validar solo si los valores fueron modificados
+            if (nuevoNombre.isEmpty() || nuevoCorreo.isEmpty() || textoContrasena.text.toString().isEmpty() ||
+                nuevoTelefono.isEmpty() || textoAltura.text.toString().isEmpty() || textoPeso.text.toString().isEmpty() ||
+                textoFecha.text.toString().isEmpty()) {
+
                 Toast.makeText(this, "Hay campos vacíos", Toast.LENGTH_LONG).show()
 
+            } else if (nuevoNombre != nombreOriginal && usuarioBD.comprobarUsuarioNombre(nuevoNombre)) {
+                Toast.makeText(this, "Este nombre de usuario ya está en uso", Toast.LENGTH_LONG).show()
+
+            } else if (nuevoCorreo != correoOriginal && usuarioBD.comprobarUsuarioCorreo(nuevoCorreo)) {
+                Toast.makeText(this, "Ya hay un usuario con este correo electrónico", Toast.LENGTH_LONG).show()
+
+            } else if (nuevoTelefono != telefonoOriginal && usuarioBD.comprobarUsuarioTelefono(nuevoTelefono)) {
+                Toast.makeText(this, "Ya hay un usuario con este teléfono en uso", Toast.LENGTH_LONG).show()
+
+            } else if (nuevoTelefono.length != 9) {
+                Toast.makeText(this, "Número de teléfono inválido", Toast.LENGTH_LONG).show()
+
             } else {
+                usuarioBD.actualizarUsuario(
+                    usuarioId,
+                    nuevoNombre,
+                    nuevoCorreo,
+                    textoContrasena.text.toString(),
+                    nuevoTelefono,
+                    textoAltura.text.toString().toDouble(),
+                    textoPeso.text.toString().toDouble(),
+                    textoFecha.text.toString(),
+                    spinnerObjetivo.selectedItem.toString()
+                )
 
-                usuarioBD.actualizarUsuario(usuarioId, textoNombre.text.toString(), textoCorreo.text.toString(), textoContrasena.text.toString(),
-                    textoTelefono.text.toString(), textoAltura.text.toString().toDouble(), textoPeso.text.toString().toDouble(),
-                    textoFecha.text.toString(), spinnerObjetivo.selectedItem.toString())
-
-                Toast.makeText(this, "Usuario ${textoNombre.text} actualizado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Usuario ${nuevoNombre} actualizado", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, VerPerfil::class.java)
                 startActivity(intent)
             }
         }
+
 
         //Configuración de footer y header
         supportFragmentManager.beginTransaction()

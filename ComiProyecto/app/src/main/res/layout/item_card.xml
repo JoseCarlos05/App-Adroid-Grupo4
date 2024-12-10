@@ -18,7 +18,7 @@
             android:id="@+id/card_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Título de la carta"
+            android:text="@string/titulocarta"
             android:textSize="18sp"
             android:textColor="#000000"
             android:layout_gravity="start"
@@ -36,7 +36,7 @@
                 android:id="@+id/card_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descripción de la carta"
+                android:text="@string/descripciondelacarta"
                 android:textSize="14sp"
                 android:textColor="#555555"
                 android:layout_weight="1"/>
@@ -47,7 +47,18 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="end"
-                android:contentDescription="Ícono"/>
+                android:contentDescription="@string/iconocarta"/>
+
+            <!-- Texto "(Tu objetivo)" que será visible solo cuando coincida con el objetivo del usuario -->
+            <TextView
+                android:id="@+id/objective_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tuobj"
+                android:textColor="@color/colorboton"
+                android:textSize="14sp"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"/>
         </LinearLayout>
 
     </LinearLayout>
