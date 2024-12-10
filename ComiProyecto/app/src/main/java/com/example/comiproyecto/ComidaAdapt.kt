@@ -36,7 +36,7 @@ class ComidaAdapt(private val listaComidas: List<Map<String, Any>>) :
             items.addAll(groupedComidas[fecha] ?: emptyList())
         }
     }
-    // Determina el tipo de vista basado en el tipo de elemento en la lista
+    // Determina el tipo de vista basado en el tipo de elemento en la lista.
     override fun getItemViewType(position: Int): Int {
         return if (items[position] is String) viewTypeDate else viewTypeComida
     }
