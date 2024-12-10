@@ -24,10 +24,16 @@ class ComidaAdapt(private val listaComidas: List<Map<String, Any>>) :
     private val items = mutableListOf<Any>()
 
     init {
+        // Parse the dates and sort them in descending order
+        val dateFormat = SimpleDateFormat("yyyy-M-d", Locale.getDefault())
+        val sortedDates = groupedComidas.keys.map { dateFormat.parse(it) to it }
+            .sortedByDescending { it.first }
+            .map { it.second }
+
         // Recorre cada grupo de comidas y agrega la fecha seguida de las comidas
-        groupedComidas.forEach { (fecha, comidas) ->
+        sortedDates.forEach { fecha ->
             items.add(fecha)
-            items.addAll(comidas)
+            items.addAll(groupedComidas[fecha] ?: emptyList())
         }
     }
     // Determina el tipo de vista basado en el tipo de elemento en la lista
@@ -93,12 +99,12 @@ class ComidaAdapt(private val listaComidas: List<Map<String, Any>>) :
             cantidad.text = comida["cantidad"].toString() + " g"
             val cantidad = comida["cantidad"] as? Int ?: 1
             // Calcula las cantidades totales de nutrientes según la cantidad de la comida
-            val calorias = (comida["calorias"] as? Int ?: 0) * cantidad / 100
-            val proteinas = (comida["proteinas"] as? Double ?: 0.0) * cantidad / 100
-            val carbohidratos = (comida["carbohidratos"] as? Double ?: 0.0) * cantidad / 100
-            val grasas = (comida["grasas"] as? Double ?: 0.0) * cantidad / 100
-            val vitaminas = (comida["vitaminas"] as? Double ?: 0.0) * cantidad / 100
-            val minerales = (comida["minerales"] as? Double ?: 0.0) * cantidad / 100
+            val calorias = (comida["calorias"] as? Int ?: 0) * cantidad
+            val proteinas = (comida["proteinas"] as? Double ?: 0.0) * cantidad
+            val carbohidratos = (comida["carbohidratos"] as? Double ?: 0.0) * cantidad
+            val grasas = (comida["grasas"] as? Double ?: 0.0) * cantidad
+            val vitaminas = (comida["vitaminas"] as? Double ?: 0.0) * cantidad
+            val minerales = (comida["minerales"] as? Double ?: 0.0) * cantidad
             // Muestra las calorías en el TextView
             nutrientes.text = "Calorías: $calorias kcal"
             // Configura el clic en la imagen para mostrar más detalles en un diálogo
